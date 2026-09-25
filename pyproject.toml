@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genius-kitchen"
+version = "2.0.0"
+description = "Desktop food inventory and recipe-matching application"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "Jirapas Wongtreenatrkoon"}]
+dependencies = []
+
+[project.scripts]
+genius-kitchen = "genius_kitchen.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+genius_kitchen = ["data/*.json"]
