@@ -44,6 +44,9 @@ def arrow(ax, a, b, label=None):
 def save(fig, name):
     for ext in ("svg", "png"):
         fig.savefig(OUT/f"{name}.{ext}", dpi=160, facecolor=BG, metadata={"Date":None} if ext=="svg" else None)
+        if ext == "svg":
+            path = OUT / f"{name}.{ext}"
+            path.write_text("\n".join(line.rstrip() for line in path.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8")
     plt.close(fig)
 
 
