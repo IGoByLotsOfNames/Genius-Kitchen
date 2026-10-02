@@ -1,17 +1,99 @@
-name: Python checks
+name: Desktop and browser checks
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  desktop:
+    name: Desktop / ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.12']
+    env:
+      GK_REQUIRE_GUI: '1'
+      GK_EXPECT_INSTALLED: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONPATH: ''
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - run: python -m pip install .
-      - run: python -m unittest discover -s tests
-      - run: python -m compileall -q src
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install the regular package and development tools
+        run: python -m pip install ".[dev]"
+      - run: python -m pip check
+      - name: Lint maintained Python source and tools
+        run: python -m ruff check src tests benchmarks demo.py desktop tools
+      - name: Check core formatting
+        run: python -m ruff format --check src tests benchmarks demo.py
+      - name: Install virtual display
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth
+      - name: Test on Linux with real Tk under a virtual display
+        if: runner.os == 'Linux'
+        run: xvfb-run -a python -m coverage run -m unittest discover -s tests -v
+      - name: Test on Windows with real Tk
+        if: runner.os == 'Windows'
+        run: python -m coverage run -m unittest discover -s tests -v
+      - name: Exercise the checkout demo on Linux
+        if: runner.os == 'Linux'
+        run: xvfb-run -a python -I -B demo.py --smoke-test
+      - name: Exercise the checkout demo on Windows
+        if: runner.os == 'Windows'
+        run: python -I -B demo.py --smoke-test
+      - name: Replay retained benchmark inputs without collecting timings
+        run: python -B benchmarks/recipe_matching.py --check --inputs docs/evidence/2026-10-02/benchmark/inputs.json
+      - name: Build an installable wheel
+        run: python -m pip wheel --no-deps --wheel-dir dist .
+      - name: Export measured test coverage
+        if: always()
+        run: python -m coverage xml
+      - name: Retain coverage evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.os }}-py${{ matrix.python }}
+          path: coverage.xml
+          if-no-files-found: warn
+          retention-days: 14
+
+  browser:
+    name: Local browser / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install development tools
+        run: python -m pip install ".[dev]"
+      - name: Check shared-core source identity
+        run: python tools/check_core_copies.py
+      - name: Lint browser backend and packaging scripts
+        run: python -m ruff check web/server.py web/tests/test_server.py web/build_web.py web/verify_web.py
+      - name: Test actual local HTTP requests and persistence
+        run: python -B -m unittest discover -s web/tests -v
+      - name: Test shipped frontend state handling with controlled DOM and I/O
+        run: node --test web/tests/test_frontend.cjs
