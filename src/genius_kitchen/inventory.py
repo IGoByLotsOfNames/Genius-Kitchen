@@ -25,9 +25,7 @@ class Inventory:
             raise ValueError("Days must be non-negative")
         reference = today or date.today()
         return tuple(
-            item
-            for item in self.ingredients
-            if 0 <= item.days_until_expiry(reference) <= days
+            item for item in self.ingredients if 0 <= item.days_until_expiry(reference) <= days
         )
 
     def expired(self, today: date | None = None) -> tuple[Ingredient, ...]:
@@ -41,4 +39,3 @@ class Inventory:
             for item in self._ingredients
             if item.days_until_expiry(reference) >= 0 and item.quantity > 0
         }
-
