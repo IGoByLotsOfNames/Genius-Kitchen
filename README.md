@@ -25,7 +25,7 @@ I developed the original Windows application during 2021–2023 using **Python, 
 
 ## How the current code fits together
 
-![Architecture: the Tkinter interface coordinates an inventory, JSON storage and a recipe matcher; domain data is independent of the UI.](docs/visuals/architecture.svg)
+![Architecture: the Tkinter interface coordinates an inventory, JSON storage and a recipe matcher; domain data is independent of the UI.](docs/visuals/architecture.png)
 
 | Component | Responsibility | Source |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ This structure allows date and matching rules to be tested without opening a win
 
 ## An explainable recipe match
 
-![Worked example: rice and egg are available, expired tomato is excluded; Vegetable Fried Rice matches two of five names and Tomato Omelette matches one of three.](docs/visuals/recipe-matching.svg)
+![Worked example: rice and egg are available, expired tomato is excluded; Vegetable Fried Rice matches two of five names and Tomato Omelette matches one of three.](docs/visuals/recipe-matching.png)
 
 *Illustrative input evaluated against the bundled recipe definitions; this is a schematic, not an application screenshot or measured user outcome.*
 
