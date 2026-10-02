@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-02",
+  "scope": "Local checks of the integrated source before publication; original archive unchanged",
+  "integration_base": "dec337c85d46dfe8155ef6b938a55eda8c416b6b",
+  "python": "3.12.14",
+  "platform": "Windows",
+  "installation": "fresh non-editable package in isolated virtual environment",
+  "core_tests": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 4.118,
+    "mandatory_tk": true,
+    "required_installed_import": true
+  },
+  "lint": {
+    "passed": true,
+    "scope": "core, tests, benchmark, desktop wrappers, browser backend/build/verifier, integration guard"
+  },
+  "format": {
+    "passed": true,
+    "files": 18,
+    "scope": "src, tests, benchmarks and demo.py"
+  },
+  "demo": {
+    "headless_sample": true,
+    "hidden_tk_add_remove_persistence": true
+  },
+  "core_copy_identity": {
+    "matched_files": 8,
+    "byte_identical": true
+  },
+  "benchmark_replay": {
+    "passed": true,
+    "scenarios": [
+      "bundled",
+      "synthetic-100",
+      "synthetic-1000",
+      "synthetic-10000"
+    ],
+    "new_timings_collected": false
+  },
+  "ci_configuration": {
+    "desktop_jobs": 4,
+    "browser_jobs": 2,
+    "remote_result_not_claimed_in_this_local_record": true
+  },
+  "integration_changes": "Root layout and copied launcher/build paths, portable examples, CI and documentation. Application core, web server and frontend logic remain identical to the supplied upgrade.",
+  "source_sha256": {
+    "src/genius_kitchen/__init__.py": "dc75adccde1b1b5bce3fa07b7016b68ec7a4c99cb5f679495685da4324f9c224",
+    "src/genius_kitchen/__main__.py": "df9e00148151f02484be40fd539eee79e2b94a99010db37ebd729e893c9e1c53",
+    "src/genius_kitchen/app.py": "5268ecf0d3ffd0615f558bca30c633b84d4c5acc5fb9f847dd576df22a7247f1",
+    "src/genius_kitchen/inventory.py": "414dfb98693d3b4ec93a63684369bc1c19705e3b8bf4ce68ed80fb6672c1b841",
+    "src/genius_kitchen/models.py": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+    "src/genius_kitchen/recipes.py": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+    "src/genius_kitchen/storage.py": "aa5bc487a4925c9ef86d0db75288c87eb9c977afc01821f050ba00a4729ff215",
+    "src/genius_kitchen/data/recipes.json": "e3e5d35424eaa7da388300d9c659f21ed74a419c7ccd2e0570c15a19d998611c",
+    "demo.py": "0921c6f4e8718b192e8adb207bf3fe7bc1914f9de5d59891456c521d6a67d9da",
+    "benchmarks/recipe_matching.py": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290",
+    "desktop/launcher.py": "d8e41f68a542d4eeb660b3bdb4266e88b2d4836d601ae8f0dc7814934076196b",
+    "desktop/build_desktop.py": "80454593b4d81b92a20f75cef76076e2d0a10c587b8a35016120b4d88642a061",
+    "web/build_web.py": "c902878b9f32c9ccbc6e69a7968de24d0e09e741a9adf95c363fd74029db401c",
+    "tools/check_core_copies.py": "ca698eb28f5df8678b89ba1498dcb71216ba513bebfc395510502dd91e2a056c"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-02",
+  "scope": "Targeted real-browser walkthrough of the integrated local browser edition using an isolated synthetic pantry",
+  "initial_state": {
+    "inventory_items": 9,
+    "recipes": 6,
+    "recipe": "Banana Oat Pancakes",
+    "coverage_percent": 75,
+    "missing_ingredient": "milk",
+    "recipe_instructions_visible": true
+  },
+  "added_item": {
+    "name": "Milk",
+    "quantity": 1,
+    "unit": "litre",
+    "category": "Dairy",
+    "expiry": "2026-10-02"
+  },
+  "after_add": {
+    "inventory_items": 10,
+    "coverage_percent": 100
+  },
+  "after_removing_new_occurrence": {
+    "inventory_items": 9,
+    "coverage_percent": 75,
+    "selected_occurrence_identified_by_expiry": true
+  },
+  "narrow_viewport": {
+    "width": 390,
+    "height": 844,
+    "inner_width": 390,
+    "document_width": 375,
+    "horizontal_page_overflow": false,
+    "readable_inventory_capture": true,
+    "viewport_restored_after_check": true
+  },
+  "screenshots": [
+    "docs/assets/browser-inventory.png",
+    "docs/assets/browser-recipes.png",
+    "docs/assets/browser-mobile.png"
+  ],
+  "limits": [
+    "This is a targeted walkthrough, not a complete fresh browser audit",
+    "Earlier supplied CRUD, backup/import and shutdown checks are recorded separately",
+    "One narrow viewport does not establish complete accessibility or device coverage"
+  ]
+}
