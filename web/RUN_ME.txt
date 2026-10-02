@@ -1,0 +1,41 @@
+GENIUS KITCHEN - LOCAL WEB APPLICATION
+
+Windows, without installing Python:
+  Double-click dist\GeniusKitchen-Web.exe.
+  Your default browser opens the app at a private 127.0.0.1 address.
+  Keep the application running while using it; use Close app to stop it.
+
+Try a fresh sample session:
+  dist\GeniusKitchen-Web.exe --demo
+
+Command-line options:
+  --no-browser               Run without opening a browser.
+  --port 8765                Use a chosen local port; default chooses a free one.
+  --data-dir "C:\path"       Use this pantry directory (normal mode).
+  --demo --data-dir "C:\path" Create a unique sample subdirectory here.
+  --ready-file "C:\path\ready.json" Write the local URL and process ID.
+
+Normal pantry data is stored in:
+  %USERPROFILE%\.genius-kitchen-web\inventory.json
+This is separate from the desktop application's pantry. Export/import lets you
+transfer compatible inventory JSON explicitly. Import replaces the active pantry.
+
+Each --demo launch creates a fresh runtime\demo-* directory beside the EXE.
+The sample ingredients' expiry dates are relative to the day it is launched.
+Starting the app again does not erase a normal pantry. Invalid saved data causes
+an error and is kept for repair; it is not silently reset.
+
+If startup fails, an interactive Windows build shows an error dialog and attempts
+to save runtime\last-error.txt beside the executable. Check the chosen port and
+inventory file. The portable EXE is unsigned; it does not install a background service.
+
+For source use, Python 3.11+ is sufficient:
+  python server.py
+  python server.py --demo
+The script also works when launched using its absolute path from another folder.
+
+This version runs locally. It does not publish a website or expose a public server.
+Use one server process per inventory file. Several browser tabs can use the same
+server; a stale change is rejected and asks you to refresh.
+
+See BUILD.txt for rebuilding and verifying the Windows executable.

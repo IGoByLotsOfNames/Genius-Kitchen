@@ -1,0 +1,11 @@
+[
+  {"name": "Milk", "quantity": 1, "unit": "litre", "category": "Dairy", "expires_in_days": -1},
+  {"name": "Egg", "quantity": 6, "unit": "items", "category": "Dairy", "expires_in_days": 0},
+  {"name": "Tomato", "quantity": 3, "unit": "items", "category": "Vegetable", "expires_in_days": 2},
+  {"name": "Spring onion", "quantity": 1, "unit": "bunch", "category": "Vegetable", "expires_in_days": 3},
+  {"name": "Carrot", "quantity": 2, "unit": "items", "category": "Vegetable", "expires_in_days": 5},
+  {"name": "Rice", "quantity": 1, "unit": "kg", "category": "Pantry", "expires_in_days": 14},
+  {"name": "Banana", "quantity": 2, "unit": "items", "category": "Fruit", "expires_in_days": 2},
+  {"name": "Oats", "quantity": 500, "unit": "g", "category": "Pantry", "expires_in_days": 30},
+  {"name": "Soy sauce", "quantity": 1, "unit": "bottle", "category": "Pantry", "expires_in_days": 60}
+]

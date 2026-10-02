@@ -1,0 +1,53 @@
+BUILD AND VERIFY THE WINDOWS WEB EXECUTABLE
+
+The application runtime is standard-library Python. PyInstaller is needed only
+to create the standalone EXE. Use Windows Python 3.11+ and requirements-build.txt.
+Install the pinned toolchain into the sibling desktop\tools folder first; it is not included in the repository.
+
+From this directory:
+  python build_web.py
+Or select another directory containing the pinned build packages:
+  python build_web.py --tools-dir "C:\path\to\tools"
+
+To install the declared build packages into a new directory when needed:
+  python -m pip install --target "C:\path\to\tools" -r requirements-build.txt
+
+build_web.py resolves every input relative to its own location, clears inherited
+PYTHONHOME/PYTHONPATH/Tcl settings, then sets only the chosen tool directory in the
+build subprocess's PYTHONPATH. Build/cache/temp/spec files stay under web\build.
+It produces dist\GeniusKitchen-Web.exe as a windowed, onefile Windows program.
+Tk is explicitly excluded. Source core/, demo_sample.json, static/ and build
+metadata are bundled. dist\LICENSE.txt is copied from the repository root licence.
+Build-tool directories are read only. No commit, upload or installation occurs.
+
+build-report.json records source SHA-256 hashes, tool version metadata, the exact
+command, build success and EXE SHA-256. The builder checks that application inputs
+did not change during packaging. This is a repeatable build procedure, not a claim
+of byte-for-byte deterministic output across machines or rebuilds.
+
+After building:
+  python verify_web.py
+
+The verifier launches the actual EXE from a new verification directory, with
+--demo --no-browser and explicit data/ready/diagnostics paths. It removes external
+Python/Tcl environment variables, uses isolated TEMP, and performs real HTTP CRUD,
+export/import, conflict and request-security checks. It checks the served static
+assets against source bytes and verifies core module paths are inside the frozen
+extraction directory. It records whether Tk was loaded and compares resource hashes
+with the build inputs. Finally it requests authorized shutdown and checks exit 0.
+It does not stop an existing preview or access a personal pantry.
+
+Evidence is saved under verification\<timestamp>\ and verification\latest.json.
+These are packaging/HTTP checks; interactive frontend validation is separate.
+No timing benchmark is run. A local passing result does not establish public-server
+security, Windows support on every device, or Linux behavior.
+
+Backend source tests:
+  python -B -m unittest discover -s tests -v
+
+Optional packaging diagnostics when launching directly:
+  dist\GeniusKitchen-Web.exe --demo --no-browser --ready-file runtime\ready.json --diagnostics-file runtime\diagnostics.json
+
+Only the explicit diagnostics option writes module/resource-path details. Those
+details are not exposed by the normal HTTP API. The normal application opens the
+default browser; --no-browser is used for automated checks.

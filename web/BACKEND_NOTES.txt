@@ -1,0 +1,100 @@
+Genius Kitchen local web backend
+===============================
+
+Run from any working directory with Python 3.11 or newer:
+  python <absolute-path-to-web>/server.py
+
+Useful options:
+  --demo                 Create a new, isolated sample session on every launch.
+  --no-browser           Print the local URL without opening a browser.
+  --port 8765            Choose a port; the default 0 selects a free port.
+  --data-dir <directory> Use this inventory directory (normal mode), or create
+                         a unique demo subdirectory here (demo mode).
+  --ready-file <path>    Write {"url": "http://127.0.0.1:<port>/", "pid": ...}.
+
+Normal inventory is separate from the desktop application's inventory:
+  ~/.genius-kitchen-web/inventory.json
+No inventory is created until a successful mutation. Unreadable or malformed
+existing data prevents startup and is never replaced with an empty inventory.
+Demo sessions are under web/runtime/demo-* for source launches, or runtime/demo-*
+beside a frozen executable. An explicit --data-dir overrides the session parent.
+The nine demo ingredients use expiry offsets relative to the launch date.
+
+API
+---
+GET /api/state returns:
+  revision, csrf_token, today, items, recipes, demo_mode
+Each item has name, quantity, unit, category, expires_on, id,
+days_until_expiry and status (expired/soon/fresh). IDs are string indices in
+the current expiry-sorted inventory. They must be used with that view's revision.
+Each recipe has id, name, coverage (0 to 1), available, missing, ingredients,
+instructions and source_url. Matching uses the unchanged copied Python core.
+
+GET /api/export downloads the legacy-compatible inventory JSON array.
+
+Every mutation must send:
+  Origin: http://127.0.0.1:<bound-port>
+  X-CSRF-Token: <state.csrf_token>
+  If-Match: <state.revision>
+Both raw and quoted If-Match revisions are accepted. Browser same-origin fetch
+adds Origin for these mutation methods. JSON bodies use application/json.
+
+POST /api/items             Add one complete ingredient.
+PATCH /api/items/<id>       Replace one complete ingredient.
+DELETE /api/items/<id>      Remove one ingredient; no body or {}.
+POST /api/import            {"items": [...]} explicitly replaces the inventory.
+POST /api/demo              {} loads the sample only into an empty inventory.
+POST /api/shutdown          {} returns current state and stops the local server.
+
+Add/edit require exactly name, quantity, unit, category and expires_on.
+Import accepts the core's legacy format, including an omitted category defaulting
+to Other. All successful mutations return a fresh state. Errors are JSON objects
+with an error string: 400 invalid input, 403 request guard failure, 409 stale
+revision/conflict, 404 unknown route, 500 storage/read failure. Body limit: 1 MiB.
+The revision includes inventory contents and the current date. Refresh after a
+409, preserving unsaved form values until the user chooses to resubmit.
+
+Local-serving boundary
+----------------------
+The server binds only 127.0.0.1. Host must match the exact bound address and port;
+Origins, when present, must match it too. Mutations also require Origin and the
+per-process CSRF token. There is no CORS permission, public binding or login.
+Only files under static/ with an allowed asset extension are served. Traversal
+and resolved paths outside static/ are refused. Responses use no-store, nosniff,
+a same-origin CSP and framing restrictions. Use external scripts/styles.
+
+Each process uses an RLock around disk reload, revision comparison, mutation,
+persistence and state response. A candidate is not persisted until validation
+and state construction succeed. The copied JSON store writes a sibling temporary
+file before replacing the inventory. This is NOT a cross-process transaction
+lock or a power-loss durability guarantee: run one server per inventory file.
+Two tabs connected to that server receive stale-revision protection. Independent
+external writers can still race after the server rereads the file.
+
+Packaging
+---------
+Resource paths use __file__ for source launches and sys._MEIPASS for a
+PyInstaller build. Bundle core/, demo_sample.json and static/ at those exact
+relative locations. Core Python/data files are byte-identical copies of
+src/genius_kitchen at the repository root. CI checks that the copies agree.
+No Tk module is imported by server.py. The core copy includes the original Tk
+entrypoints only to retain an exact source copy.
+
+Backend verification
+--------------------
+From the repository root, with the development extra installed:
+  python -B -m unittest discover -s web/tests -v
+  python -B -m ruff check web/server.py web/tests/test_server.py
+  python -B -m ruff format --check web/server.py web/tests/test_server.py
+  node --test web/tests/test_frontend.cjs
+
+26 tests passed locally on Windows using Python 3.12.14. They exercise actual
+loopback HTTP, CRUD and persistence, import/export, invalid input, stale views,
+concurrent requests, CSRF/Origin/Host guards, static traversal, file corruption,
+save failures, unique demo sessions and launching from another working directory
+with paths containing spaces. The CLI test reads readiness without fixed sleeps
+and shuts down through the API. Fixtures use only web/tests/runtime.
+Windowed stream handling and startup error logging are also tested.
+Lint and formatting checks passed. These source checks do not establish public-server
+security, Linux behavior, browser frontend behavior or packaged-EXE behavior.
+Run python web/verify_web.py after building to create a fresh frozen-executable verification report. Published evidence scopes are explained in ../docs/VERIFICATION.md.
