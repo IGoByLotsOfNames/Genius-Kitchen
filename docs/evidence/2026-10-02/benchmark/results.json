@@ -1,0 +1,1070 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "started_utc": "2026-10-02T13:09:16.262736+00:00",
+  "metric": "warm match_recipes latency; batch-derived ms per call",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 165 Stepping 2, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "clock": {
+    "implementation": "QueryPerformanceCounter()",
+    "resolution_seconds": 1e-07,
+    "monotonic": true
+  },
+  "parameters": {
+    "seed": 20261002,
+    "processes": 5,
+    "samples": 7,
+    "target_ms": 50,
+    "limit": 10,
+    "warmup_calls": 3,
+    "max_batch_calls": 131072,
+    "gc_enabled": true,
+    "pythonhashseed": "0"
+  },
+  "sources": {
+    "genius_kitchen.models": {
+      "sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+      "origin": "checkout/src"
+    },
+    "genius_kitchen.recipes": {
+      "sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+      "origin": "checkout/src"
+    },
+    "benchmark": {
+      "sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290"
+    }
+  },
+  "inputs_sha256": "41d3a28e8fa9c63499a71dcada0ff1fef661435e7016ec0395da860246cb1f4b",
+  "workers": [
+    {
+      "index": 0,
+      "order": [
+        "synthetic-10000",
+        "bundled",
+        "synthetic-1000",
+        "synthetic-100"
+      ],
+      "sources": {
+        "genius_kitchen.models": {
+          "sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+          "origin": "checkout/src"
+        },
+        "genius_kitchen.recipes": {
+          "sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+          "origin": "checkout/src"
+        },
+        "benchmark": {
+          "sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290"
+        }
+      },
+      "inputs_sha256": "41d3a28e8fa9c63499a71dcada0ff1fef661435e7016ec0395da860246cb1f4b",
+      "cases": [
+        {
+          "name": "synthetic-10000",
+          "recipe_count": 10000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.0007,
+          "mean_recipe_overlap": 0.18763525974025974,
+          "input_sha256": "e574dd404f8319bca08df0cf9cb4d2ff36242d46a3cd8905a70159f3c6050768",
+          "expected_result_sha256": "9cd4ba0a0bf518d3881c6f28a2cc0fefbdbecaedfc80f776b8c0c3a3ffa77975",
+          "calls_per_batch": 1,
+          "calibration_elapsed_ns": 92218000,
+          "target_reached": true,
+          "elapsed_ns": [
+            64333500,
+            80251700,
+            100662700,
+            60128300,
+            104651700,
+            76251500,
+            64493400
+          ],
+          "per_call_ms": [
+            64.3335,
+            80.2517,
+            100.6627,
+            60.1283,
+            104.6517,
+            76.2515,
+            64.4934
+          ],
+          "within_process": {
+            "mean_ms": 78.68182857142857,
+            "median_ms": 76.2515,
+            "sample_stdev_ms": 17.87635022692592,
+            "sample_variance_ms2": 319.56389743571435,
+            "min_ms": 60.1283,
+            "max_ms": 104.6517
+          }
+        },
+        {
+          "name": "bundled",
+          "recipe_count": 6,
+          "pantry_count": 6,
+          "normalized_pantry_count": 6,
+          "ingredient_count_min": 3,
+          "ingredient_count_max": 5,
+          "ingredient_count_mean": 4,
+          "mean_recipe_overlap": 0.5444444444444444,
+          "input_sha256": "74f8c917dd97970a1557503a9b82ff7ad516a95159da2f00759ac0968e09963f",
+          "expected_result_sha256": "2ffd0d5b950cd4eea0285ec882fc940f3c2056075fa6a3c58ab2476200f7699c",
+          "calls_per_batch": 4096,
+          "calibration_elapsed_ns": 100667200,
+          "target_reached": true,
+          "elapsed_ns": [
+            98690100,
+            91565300,
+            115312900,
+            96879000,
+            98887300,
+            90420300,
+            96090800
+          ],
+          "per_call_ms": [
+            0.0240942626953125,
+            0.0223548095703125,
+            0.0281525634765625,
+            0.023652099609375,
+            0.0241424072265625,
+            0.0220752685546875,
+            0.02345966796875
+          ],
+          "within_process": {
+            "mean_ms": 0.02399015415736607,
+            "median_ms": 0.023652099609375,
+            "sample_stdev_ms": 0.0020040170570118786,
+            "sample_variance_ms2": 4.01608436479455e-06,
+            "min_ms": 0.0220752685546875,
+            "max_ms": 0.0281525634765625
+          }
+        },
+        {
+          "name": "synthetic-1000",
+          "recipe_count": 1000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.057,
+          "mean_recipe_overlap": 0.18897431457431457,
+          "input_sha256": "b9704c78279241930f0a41d8a21150f1dbb57b9d28265978d80fe821d9574af7",
+          "expected_result_sha256": "e15de0bb0f7e466e7a57012b53401a549283df3abfbed26cfed7873aadbe0940",
+          "calls_per_batch": 16,
+          "calibration_elapsed_ns": 84253000,
+          "target_reached": true,
+          "elapsed_ns": [
+            84640400,
+            106857400,
+            92279300,
+            87143800,
+            92331100,
+            119402600,
+            103991200
+          ],
+          "per_call_ms": [
+            5.290025,
+            6.6785875,
+            5.76745625,
+            5.4464875,
+            5.77069375,
+            7.4626625,
+            6.49945
+          ],
+          "within_process": {
+            "mean_ms": 6.130766071428572,
+            "median_ms": 5.77069375,
+            "sample_stdev_ms": 0.7796059975760021,
+            "sample_variance_ms2": 0.6077855114564733,
+            "min_ms": 5.290025,
+            "max_ms": 7.4626625
+          }
+        },
+        {
+          "name": "synthetic-100",
+          "recipe_count": 100,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.18,
+          "mean_recipe_overlap": 0.18868542568542568,
+          "input_sha256": "f82db4e16cbc0fbdbab3602dae108f8b389fa43a450327c4c36abb242b161171",
+          "expected_result_sha256": "b776cdfdc8440b693677e21b8114adc36b8b9189ce8ee0b80d99ed23829bd672",
+          "calls_per_batch": 128,
+          "calibration_elapsed_ns": 63266300,
+          "target_reached": true,
+          "elapsed_ns": [
+            68075600,
+            59136300,
+            54489200,
+            60113000,
+            58010100,
+            56203400,
+            63831000
+          ],
+          "per_call_ms": [
+            0.531840625,
+            0.46200234375,
+            0.425696875,
+            0.4696328125,
+            0.45320390625,
+            0.4390890625,
+            0.4986796875
+          ],
+          "within_process": {
+            "mean_ms": 0.4685921875,
+            "median_ms": 0.46200234375,
+            "sample_stdev_ms": 0.0362798678391309,
+            "sample_variance_ms2": 0.001316228810424804,
+            "min_ms": 0.425696875,
+            "max_ms": 0.531840625
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "order": [
+        "synthetic-100",
+        "synthetic-10000",
+        "synthetic-1000",
+        "bundled"
+      ],
+      "sources": {
+        "genius_kitchen.models": {
+          "sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+          "origin": "checkout/src"
+        },
+        "genius_kitchen.recipes": {
+          "sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+          "origin": "checkout/src"
+        },
+        "benchmark": {
+          "sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290"
+        }
+      },
+      "inputs_sha256": "41d3a28e8fa9c63499a71dcada0ff1fef661435e7016ec0395da860246cb1f4b",
+      "cases": [
+        {
+          "name": "synthetic-100",
+          "recipe_count": 100,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.18,
+          "mean_recipe_overlap": 0.18868542568542568,
+          "input_sha256": "f82db4e16cbc0fbdbab3602dae108f8b389fa43a450327c4c36abb242b161171",
+          "expected_result_sha256": "b776cdfdc8440b693677e21b8114adc36b8b9189ce8ee0b80d99ed23829bd672",
+          "calls_per_batch": 128,
+          "calibration_elapsed_ns": 73424600,
+          "target_reached": true,
+          "elapsed_ns": [
+            62677700,
+            61225600,
+            59213000,
+            55586500,
+            53724200,
+            53824500,
+            52826800
+          ],
+          "per_call_ms": [
+            0.48966953125,
+            0.478325,
+            0.4626015625,
+            0.43426953125,
+            0.4197203125,
+            0.42050390625,
+            0.412709375
+          ],
+          "within_process": {
+            "mean_ms": 0.44539988839285716,
+            "median_ms": 0.43426953125,
+            "sample_stdev_ms": 0.031122250631021576,
+            "sample_variance_ms2": 0.0009685944843401228,
+            "min_ms": 0.412709375,
+            "max_ms": 0.48966953125
+          }
+        },
+        {
+          "name": "synthetic-10000",
+          "recipe_count": 10000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.0007,
+          "mean_recipe_overlap": 0.18763525974025974,
+          "input_sha256": "e574dd404f8319bca08df0cf9cb4d2ff36242d46a3cd8905a70159f3c6050768",
+          "expected_result_sha256": "9cd4ba0a0bf518d3881c6f28a2cc0fefbdbecaedfc80f776b8c0c3a3ffa77975",
+          "calls_per_batch": 1,
+          "calibration_elapsed_ns": 100648800,
+          "target_reached": true,
+          "elapsed_ns": [
+            76693000,
+            104942700,
+            70853300,
+            65411300,
+            88720500,
+            59318800,
+            104091300
+          ],
+          "per_call_ms": [
+            76.693,
+            104.9427,
+            70.8533,
+            65.4113,
+            88.7205,
+            59.3188,
+            104.0913
+          ],
+          "within_process": {
+            "mean_ms": 81.43298571428572,
+            "median_ms": 76.693,
+            "sample_stdev_ms": 18.25441761076193,
+            "sample_variance_ms2": 333.2237623080953,
+            "min_ms": 59.3188,
+            "max_ms": 104.9427
+          }
+        },
+        {
+          "name": "synthetic-1000",
+          "recipe_count": 1000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.057,
+          "mean_recipe_overlap": 0.18897431457431457,
+          "input_sha256": "b9704c78279241930f0a41d8a21150f1dbb57b9d28265978d80fe821d9574af7",
+          "expected_result_sha256": "e15de0bb0f7e466e7a57012b53401a549283df3abfbed26cfed7873aadbe0940",
+          "calls_per_batch": 8,
+          "calibration_elapsed_ns": 64277700,
+          "target_reached": true,
+          "elapsed_ns": [
+            47211600,
+            48381400,
+            59485700,
+            58693200,
+            49835600,
+            69583900,
+            67967200
+          ],
+          "per_call_ms": [
+            5.90145,
+            6.047675,
+            7.4357125,
+            7.33665,
+            6.22945,
+            8.6979875,
+            8.4959
+          ],
+          "within_process": {
+            "mean_ms": 7.163546428571428,
+            "median_ms": 7.33665,
+            "sample_stdev_ms": 1.1506742397284746,
+            "sample_variance_ms2": 1.324051205974703,
+            "min_ms": 5.90145,
+            "max_ms": 8.6979875
+          }
+        },
+        {
+          "name": "bundled",
+          "recipe_count": 6,
+          "pantry_count": 6,
+          "normalized_pantry_count": 6,
+          "ingredient_count_min": 3,
+          "ingredient_count_max": 5,
+          "ingredient_count_mean": 4,
+          "mean_recipe_overlap": 0.5444444444444444,
+          "input_sha256": "74f8c917dd97970a1557503a9b82ff7ad516a95159da2f00759ac0968e09963f",
+          "expected_result_sha256": "2ffd0d5b950cd4eea0285ec882fc940f3c2056075fa6a3c58ab2476200f7699c",
+          "calls_per_batch": 2048,
+          "calibration_elapsed_ns": 52351100,
+          "target_reached": true,
+          "elapsed_ns": [
+            53757100,
+            52342200,
+            46817300,
+            44668800,
+            43895200,
+            50221800,
+            58509300
+          ],
+          "per_call_ms": [
+            0.026248583984375,
+            0.02555771484375,
+            0.022860009765625,
+            0.0218109375,
+            0.021433203125,
+            0.02452236328125,
+            0.028568994140625
+          ],
+          "within_process": {
+            "mean_ms": 0.024428829520089287,
+            "median_ms": 0.02452236328125,
+            "sample_stdev_ms": 0.002582761170520064,
+            "sample_variance_ms2": 6.670655263946171e-06,
+            "min_ms": 0.021433203125,
+            "max_ms": 0.028568994140625
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "order": [
+        "synthetic-1000",
+        "synthetic-10000",
+        "bundled",
+        "synthetic-100"
+      ],
+      "sources": {
+        "genius_kitchen.models": {
+          "sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+          "origin": "checkout/src"
+        },
+        "genius_kitchen.recipes": {
+          "sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+          "origin": "checkout/src"
+        },
+        "benchmark": {
+          "sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290"
+        }
+      },
+      "inputs_sha256": "41d3a28e8fa9c63499a71dcada0ff1fef661435e7016ec0395da860246cb1f4b",
+      "cases": [
+        {
+          "name": "synthetic-1000",
+          "recipe_count": 1000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.057,
+          "mean_recipe_overlap": 0.18897431457431457,
+          "input_sha256": "b9704c78279241930f0a41d8a21150f1dbb57b9d28265978d80fe821d9574af7",
+          "expected_result_sha256": "e15de0bb0f7e466e7a57012b53401a549283df3abfbed26cfed7873aadbe0940",
+          "calls_per_batch": 16,
+          "calibration_elapsed_ns": 131095300,
+          "target_reached": true,
+          "elapsed_ns": [
+            133171700,
+            107192000,
+            111083700,
+            140918400,
+            109584000,
+            115242700,
+            114384500
+          ],
+          "per_call_ms": [
+            8.32323125,
+            6.6995,
+            6.94273125,
+            8.8074,
+            6.849,
+            7.20266875,
+            7.14903125
+          ],
+          "within_process": {
+            "mean_ms": 7.424794642857143,
+            "median_ms": 7.14903125,
+            "sample_stdev_ms": 0.8097477154650654,
+            "sample_variance_ms2": 0.6556913627008925,
+            "min_ms": 6.6995,
+            "max_ms": 8.8074
+          }
+        },
+        {
+          "name": "synthetic-10000",
+          "recipe_count": 10000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.0007,
+          "mean_recipe_overlap": 0.18763525974025974,
+          "input_sha256": "e574dd404f8319bca08df0cf9cb4d2ff36242d46a3cd8905a70159f3c6050768",
+          "expected_result_sha256": "9cd4ba0a0bf518d3881c6f28a2cc0fefbdbecaedfc80f776b8c0c3a3ffa77975",
+          "calls_per_batch": 1,
+          "calibration_elapsed_ns": 71514000,
+          "target_reached": true,
+          "elapsed_ns": [
+            103437800,
+            82530500,
+            87842900,
+            118293500,
+            87879000,
+            120455000,
+            83081700
+          ],
+          "per_call_ms": [
+            103.4378,
+            82.5305,
+            87.8429,
+            118.2935,
+            87.879,
+            120.455,
+            83.0817
+          ],
+          "within_process": {
+            "mean_ms": 97.64577142857142,
+            "median_ms": 87.879,
+            "sample_stdev_ms": 16.392106420847227,
+            "sample_variance_ms2": 268.70115291238085,
+            "min_ms": 82.5305,
+            "max_ms": 120.455
+          }
+        },
+        {
+          "name": "bundled",
+          "recipe_count": 6,
+          "pantry_count": 6,
+          "normalized_pantry_count": 6,
+          "ingredient_count_min": 3,
+          "ingredient_count_max": 5,
+          "ingredient_count_mean": 4,
+          "mean_recipe_overlap": 0.5444444444444444,
+          "input_sha256": "74f8c917dd97970a1557503a9b82ff7ad516a95159da2f00759ac0968e09963f",
+          "expected_result_sha256": "2ffd0d5b950cd4eea0285ec882fc940f3c2056075fa6a3c58ab2476200f7699c",
+          "calls_per_batch": 2048,
+          "calibration_elapsed_ns": 51620900,
+          "target_reached": true,
+          "elapsed_ns": [
+            54255300,
+            57291600,
+            58848300,
+            67776900,
+            57384300,
+            50857900,
+            62114400
+          ],
+          "per_call_ms": [
+            0.026491845703125,
+            0.0279744140625,
+            0.028734521484375,
+            0.033094189453125,
+            0.028019677734375,
+            0.024832958984375,
+            0.030329296875
+          ],
+          "within_process": {
+            "mean_ms": 0.028496700613839285,
+            "median_ms": 0.028019677734375,
+            "sample_stdev_ms": 0.0026612857625580902,
+            "sample_variance_ms2": 7.082441909994397e-06,
+            "min_ms": 0.024832958984375,
+            "max_ms": 0.033094189453125
+          }
+        },
+        {
+          "name": "synthetic-100",
+          "recipe_count": 100,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.18,
+          "mean_recipe_overlap": 0.18868542568542568,
+          "input_sha256": "f82db4e16cbc0fbdbab3602dae108f8b389fa43a450327c4c36abb242b161171",
+          "expected_result_sha256": "b776cdfdc8440b693677e21b8114adc36b8b9189ce8ee0b80d99ed23829bd672",
+          "calls_per_batch": 128,
+          "calibration_elapsed_ns": 91288600,
+          "target_reached": true,
+          "elapsed_ns": [
+            75694400,
+            55904300,
+            58698000,
+            76960000,
+            66117800,
+            71603200,
+            59026600
+          ],
+          "per_call_ms": [
+            0.5913625,
+            0.43675234375,
+            0.458578125,
+            0.60125,
+            0.5165453125,
+            0.5594,
+            0.4611453125
+          ],
+          "within_process": {
+            "mean_ms": 0.5178619419642857,
+            "median_ms": 0.5165453125,
+            "sample_stdev_ms": 0.06756867860083857,
+            "sample_variance_ms2": 0.00456552632786342,
+            "min_ms": 0.43675234375,
+            "max_ms": 0.60125
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "order": [
+        "bundled",
+        "synthetic-100",
+        "synthetic-10000",
+        "synthetic-1000"
+      ],
+      "sources": {
+        "genius_kitchen.models": {
+          "sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+          "origin": "checkout/src"
+        },
+        "genius_kitchen.recipes": {
+          "sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+          "origin": "checkout/src"
+        },
+        "benchmark": {
+          "sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290"
+        }
+      },
+      "inputs_sha256": "41d3a28e8fa9c63499a71dcada0ff1fef661435e7016ec0395da860246cb1f4b",
+      "cases": [
+        {
+          "name": "bundled",
+          "recipe_count": 6,
+          "pantry_count": 6,
+          "normalized_pantry_count": 6,
+          "ingredient_count_min": 3,
+          "ingredient_count_max": 5,
+          "ingredient_count_mean": 4,
+          "mean_recipe_overlap": 0.5444444444444444,
+          "input_sha256": "74f8c917dd97970a1557503a9b82ff7ad516a95159da2f00759ac0968e09963f",
+          "expected_result_sha256": "2ffd0d5b950cd4eea0285ec882fc940f3c2056075fa6a3c58ab2476200f7699c",
+          "calls_per_batch": 2048,
+          "calibration_elapsed_ns": 59668500,
+          "target_reached": true,
+          "elapsed_ns": [
+            46380700,
+            31182900,
+            39102000,
+            30523700,
+            44396000,
+            43058500,
+            56493900
+          ],
+          "per_call_ms": [
+            0.022646826171875,
+            0.015226025390625,
+            0.0190927734375,
+            0.014904150390625,
+            0.021677734375,
+            0.021024658203125,
+            0.027584912109375
+          ],
+          "within_process": {
+            "mean_ms": 0.020308154296875,
+            "median_ms": 0.021024658203125,
+            "sample_stdev_ms": 0.004421880461798396,
+            "sample_variance_ms2": 1.9553026818434393e-05,
+            "min_ms": 0.014904150390625,
+            "max_ms": 0.027584912109375
+          }
+        },
+        {
+          "name": "synthetic-100",
+          "recipe_count": 100,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.18,
+          "mean_recipe_overlap": 0.18868542568542568,
+          "input_sha256": "f82db4e16cbc0fbdbab3602dae108f8b389fa43a450327c4c36abb242b161171",
+          "expected_result_sha256": "b776cdfdc8440b693677e21b8114adc36b8b9189ce8ee0b80d99ed23829bd672",
+          "calls_per_batch": 128,
+          "calibration_elapsed_ns": 73300000,
+          "target_reached": true,
+          "elapsed_ns": [
+            85837400,
+            98792000,
+            94435200,
+            97068000,
+            80132200,
+            78142300,
+            73868700
+          ],
+          "per_call_ms": [
+            0.6706046875,
+            0.7718125,
+            0.737775,
+            0.75834375,
+            0.6260328125,
+            0.61048671875,
+            0.57709921875
+          ],
+          "within_process": {
+            "mean_ms": 0.6788792410714286,
+            "median_ms": 0.6706046875,
+            "sample_stdev_ms": 0.07780084887809756,
+            "sample_variance_ms2": 0.006052972086152574,
+            "min_ms": 0.57709921875,
+            "max_ms": 0.7718125
+          }
+        },
+        {
+          "name": "synthetic-10000",
+          "recipe_count": 10000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.0007,
+          "mean_recipe_overlap": 0.18763525974025974,
+          "input_sha256": "e574dd404f8319bca08df0cf9cb4d2ff36242d46a3cd8905a70159f3c6050768",
+          "expected_result_sha256": "9cd4ba0a0bf518d3881c6f28a2cc0fefbdbecaedfc80f776b8c0c3a3ffa77975",
+          "calls_per_batch": 1,
+          "calibration_elapsed_ns": 129391700,
+          "target_reached": true,
+          "elapsed_ns": [
+            86317800,
+            112824600,
+            74296100,
+            90417700,
+            125426200,
+            87847800,
+            110901500
+          ],
+          "per_call_ms": [
+            86.3178,
+            112.8246,
+            74.2961,
+            90.4177,
+            125.4262,
+            87.8478,
+            110.9015
+          ],
+          "within_process": {
+            "mean_ms": 98.29024285714286,
+            "median_ms": 90.4177,
+            "sample_stdev_ms": 18.24249314840282,
+            "sample_variance_ms2": 332.7885562695238,
+            "min_ms": 74.2961,
+            "max_ms": 125.4262
+          }
+        },
+        {
+          "name": "synthetic-1000",
+          "recipe_count": 1000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.057,
+          "mean_recipe_overlap": 0.18897431457431457,
+          "input_sha256": "b9704c78279241930f0a41d8a21150f1dbb57b9d28265978d80fe821d9574af7",
+          "expected_result_sha256": "e15de0bb0f7e466e7a57012b53401a549283df3abfbed26cfed7873aadbe0940",
+          "calls_per_batch": 8,
+          "calibration_elapsed_ns": 53540900,
+          "target_reached": true,
+          "elapsed_ns": [
+            53983100,
+            59756800,
+            51506600,
+            72184200,
+            45107900,
+            42735400,
+            46974200
+          ],
+          "per_call_ms": [
+            6.7478875,
+            7.4696,
+            6.438325,
+            9.023025,
+            5.6384875,
+            5.341925,
+            5.871775
+          ],
+          "within_process": {
+            "mean_ms": 6.647289285714286,
+            "median_ms": 6.438325,
+            "sample_stdev_ms": 1.2712972729335004,
+            "sample_variance_ms2": 1.6161967561681552,
+            "min_ms": 5.341925,
+            "max_ms": 9.023025
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "order": [
+        "synthetic-1000",
+        "synthetic-100",
+        "bundled",
+        "synthetic-10000"
+      ],
+      "sources": {
+        "genius_kitchen.models": {
+          "sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+          "origin": "checkout/src"
+        },
+        "genius_kitchen.recipes": {
+          "sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+          "origin": "checkout/src"
+        },
+        "benchmark": {
+          "sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290"
+        }
+      },
+      "inputs_sha256": "41d3a28e8fa9c63499a71dcada0ff1fef661435e7016ec0395da860246cb1f4b",
+      "cases": [
+        {
+          "name": "synthetic-1000",
+          "recipe_count": 1000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.057,
+          "mean_recipe_overlap": 0.18897431457431457,
+          "input_sha256": "b9704c78279241930f0a41d8a21150f1dbb57b9d28265978d80fe821d9574af7",
+          "expected_result_sha256": "e15de0bb0f7e466e7a57012b53401a549283df3abfbed26cfed7873aadbe0940",
+          "calls_per_batch": 8,
+          "calibration_elapsed_ns": 58528100,
+          "target_reached": true,
+          "elapsed_ns": [
+            48276100,
+            74238300,
+            54536700,
+            52121300,
+            53610200,
+            53912500,
+            50749600
+          ],
+          "per_call_ms": [
+            6.0345125,
+            9.2797875,
+            6.8170875,
+            6.5151625,
+            6.701275,
+            6.7390625,
+            6.3437
+          ],
+          "within_process": {
+            "mean_ms": 6.918655357142857,
+            "median_ms": 6.701275,
+            "sample_stdev_ms": 1.0754733515957329,
+            "sample_variance_ms2": 1.1566429299925591,
+            "min_ms": 6.0345125,
+            "max_ms": 9.2797875
+          }
+        },
+        {
+          "name": "synthetic-100",
+          "recipe_count": 100,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.18,
+          "mean_recipe_overlap": 0.18868542568542568,
+          "input_sha256": "f82db4e16cbc0fbdbab3602dae108f8b389fa43a450327c4c36abb242b161171",
+          "expected_result_sha256": "b776cdfdc8440b693677e21b8114adc36b8b9189ce8ee0b80d99ed23829bd672",
+          "calls_per_batch": 128,
+          "calibration_elapsed_ns": 67793800,
+          "target_reached": true,
+          "elapsed_ns": [
+            68206500,
+            71396800,
+            68950100,
+            77601700,
+            73234900,
+            85948900,
+            94476600
+          ],
+          "per_call_ms": [
+            0.53286328125,
+            0.5577875,
+            0.53867265625,
+            0.60626328125,
+            0.57214765625,
+            0.67147578125,
+            0.7380984375
+          ],
+          "within_process": {
+            "mean_ms": 0.60247265625,
+            "median_ms": 0.57214765625,
+            "sample_stdev_ms": 0.07637890910815044,
+            "sample_variance_ms2": 0.005833737756551106,
+            "min_ms": 0.53286328125,
+            "max_ms": 0.7380984375
+          }
+        },
+        {
+          "name": "bundled",
+          "recipe_count": 6,
+          "pantry_count": 6,
+          "normalized_pantry_count": 6,
+          "ingredient_count_min": 3,
+          "ingredient_count_max": 5,
+          "ingredient_count_mean": 4,
+          "mean_recipe_overlap": 0.5444444444444444,
+          "input_sha256": "74f8c917dd97970a1557503a9b82ff7ad516a95159da2f00759ac0968e09963f",
+          "expected_result_sha256": "2ffd0d5b950cd4eea0285ec882fc940f3c2056075fa6a3c58ab2476200f7699c",
+          "calls_per_batch": 2048,
+          "calibration_elapsed_ns": 62996600,
+          "target_reached": true,
+          "elapsed_ns": [
+            61187900,
+            53087100,
+            61345200,
+            52358800,
+            57971600,
+            49583800,
+            60785400
+          ],
+          "per_call_ms": [
+            0.029876904296875,
+            0.025921435546875,
+            0.0299537109375,
+            0.0255658203125,
+            0.0283064453125,
+            0.02421083984375,
+            0.02968037109375
+          ],
+          "within_process": {
+            "mean_ms": 0.02764507533482143,
+            "median_ms": 0.0283064453125,
+            "sample_stdev_ms": 0.0023797376224449227,
+            "sample_variance_ms2": 5.663151151679812e-06,
+            "min_ms": 0.02421083984375,
+            "max_ms": 0.0299537109375
+          }
+        },
+        {
+          "name": "synthetic-10000",
+          "recipe_count": 10000,
+          "pantry_count": 48,
+          "normalized_pantry_count": 48,
+          "ingredient_count_min": 6,
+          "ingredient_count_max": 12,
+          "ingredient_count_mean": 9.0007,
+          "mean_recipe_overlap": 0.18763525974025974,
+          "input_sha256": "e574dd404f8319bca08df0cf9cb4d2ff36242d46a3cd8905a70159f3c6050768",
+          "expected_result_sha256": "9cd4ba0a0bf518d3881c6f28a2cc0fefbdbecaedfc80f776b8c0c3a3ffa77975",
+          "calls_per_batch": 1,
+          "calibration_elapsed_ns": 78903800,
+          "target_reached": true,
+          "elapsed_ns": [
+            115924000,
+            89919600,
+            88099800,
+            114794400,
+            107372500,
+            140504000,
+            81532800
+          ],
+          "per_call_ms": [
+            115.924,
+            89.9196,
+            88.0998,
+            114.7944,
+            107.3725,
+            140.504,
+            81.5328
+          ],
+          "within_process": {
+            "mean_ms": 105.44958571428572,
+            "median_ms": 107.3725,
+            "sample_stdev_ms": 20.590275327803703,
+            "sample_variance_ms2": 423.9594380747618,
+            "min_ms": 81.5328,
+            "max_ms": 140.504
+          }
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "name": "bundled",
+      "recipe_count": 6,
+      "process_means_ms": [
+        0.02399015415736607,
+        0.024428829520089287,
+        0.028496700613839285,
+        0.020308154296875,
+        0.02764507533482143
+      ],
+      "between_process": {
+        "mean_ms": 0.024973782784598213,
+        "median_ms": 0.024428829520089287,
+        "sample_stdev_ms": 0.0032626424276468993,
+        "sample_variance_ms2": 1.0644835610681652e-05,
+        "min_ms": 0.020308154296875,
+        "max_ms": 0.028496700613839285
+      }
+    },
+    {
+      "name": "synthetic-100",
+      "recipe_count": 100,
+      "process_means_ms": [
+        0.4685921875,
+        0.44539988839285716,
+        0.5178619419642857,
+        0.6788792410714286,
+        0.60247265625
+      ],
+      "between_process": {
+        "mean_ms": 0.5426411830357143,
+        "median_ms": 0.5178619419642857,
+        "sample_stdev_ms": 0.09707438842979854,
+        "sample_variance_ms2": 0.009423436889019405,
+        "min_ms": 0.44539988839285716,
+        "max_ms": 0.6788792410714286
+      }
+    },
+    {
+      "name": "synthetic-1000",
+      "recipe_count": 1000,
+      "process_means_ms": [
+        6.130766071428572,
+        7.163546428571428,
+        7.424794642857143,
+        6.647289285714286,
+        6.918655357142857
+      ],
+      "between_process": {
+        "mean_ms": 6.857010357142857,
+        "median_ms": 6.918655357142857,
+        "sample_stdev_ms": 0.49788481462827927,
+        "sample_variance_ms2": 0.24788928863743603,
+        "min_ms": 6.130766071428572,
+        "max_ms": 7.424794642857143
+      }
+    },
+    {
+      "name": "synthetic-10000",
+      "recipe_count": 10000,
+      "process_means_ms": [
+        78.68182857142857,
+        81.43298571428572,
+        97.64577142857142,
+        98.29024285714286,
+        105.44958571428572
+      ],
+      "between_process": {
+        "mean_ms": 92.30008285714285,
+        "median_ms": 97.64577142857142,
+        "sample_stdev_ms": 11.628827097142898,
+        "sample_variance_ms2": 135.2296196552449,
+        "min_ms": 78.68182857142857,
+        "max_ms": 105.44958571428572
+      }
+    }
+  ],
+  "finished_utc": "2026-10-02T13:09:37.423943+00:00"
+}

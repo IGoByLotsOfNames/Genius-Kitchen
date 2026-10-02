@@ -1,0 +1,13 @@
+Warm recipe ranking: completed measurement
+Unit: milliseconds per call, derived from timed batches.
+Dispersion below is across process means; it is not request-tail latency.
+Case | recipes | mean ms | median ms | sample SD ms | sample variance ms^2
+bundled | 6 | 0.024974 | 0.024429 | 0.003263 | 0.000010645
+synthetic-100 | 100 | 0.542641 | 0.517862 | 0.097074 | 0.009423437
+synthetic-1000 | 1000 | 6.857010 | 6.918655 | 0.497885 | 0.247889289
+synthetic-10000 | 10000 | 92.300083 | 97.645771 | 11.628827 | 135.229619655
+
+Baseline only: no before/after speedup is claimed.
+Synthetic cases use one fixed pantry/distribution; bundled data is a separate scenario.
+Excludes loading, JSON parsing, pantry extraction, GUI rendering and process startup.
+Full samples, provenance and parameters: results.json; exact inputs: inputs.json.
