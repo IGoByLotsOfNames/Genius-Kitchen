@@ -8,7 +8,7 @@ Genius Kitchen started with two ordinary problems in my household: ingredients b
 
 The original application received a **Distinction Award and the sole People's Choice Award** at the **2021 Coding Lab International Coding Competition**.
 
-[Project history](docs/ORIGINAL_PROJECT.md) · [Try the demos](#try-it) · [Engineering](#how-the-current-code-fits-together) · [Checks and measurements](docs/VERIFICATION.md)
+**[Download the Windows editions](https://github.com/IGoByLotsOfNames/Genius-Kitchen/releases/tag/2026.10.02)** · [Project history](docs/ORIGINAL_PROJECT.md) · [Try the demos](#try-it) · [Engineering](#how-the-current-code-fits-together) · [Checks and measurements](docs/VERIFICATION.md)
 
 ## A personal project, developed over time
 
@@ -43,6 +43,10 @@ AI helped develop the software. Recipe matching in the application is determinis
 The two editions use separate pantry files. Compatible JSON can be transferred explicitly; changes do not synchronize automatically. The historical application also explored live recipe retrieval, multiple interface languages and remote updates. Those integrations are part of its history; the current editions use local data.
 
 ## Try it
+
+For Windows, [download the ZIP bundle](https://github.com/IGoByLotsOfNames/Genius-Kitchen/releases/tag/2026.10.02) for both applications and their demo launchers, or choose either standalone executable. Extract the ZIP before running it. The portable applications include their Python runtimes, so Python installation is unnecessary.
+
+These are the supplied **2 October 2026 builds**, verified without changing their bytes. The release notes and checksums record their provenance.
 
 The source demos require **Python 3.11+**. Run these commands from the repository root:
 
