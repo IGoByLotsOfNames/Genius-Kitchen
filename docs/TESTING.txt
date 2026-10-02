@@ -1,0 +1,95 @@
+# docs/TESTING.txt
+Genius Kitchen: testing and development
+
+FROM CODE: Development tools are pinned in pyproject.toml's dev extra. The
+application itself has no third-party Python runtime dependencies. Tkinter
+and a working Tcl/Tk runtime/display are required for GUI integration tests.
+
+Windows PowerShell, from the project directory:
+
+# docs/TESTING.txt - create and activate a development environment
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e ".[dev]"
+$env:GK_REQUIRE_GUI = "1"
+python -m ruff check .
+python -m ruff format --check .
+python -m coverage run -m unittest discover -s tests -v
+python -m coverage report
+python -m coverage html
+python -m pip check
+
+FROM CODE: The HTML coverage report is written to htmlcov/index.html.
+To apply formatting intentionally, run python -m ruff format .; CI only
+checks formatting and does not modify files.
+
+Linux with a Tk-capable Python and Xvfb installed, from the project directory:
+
+# docs/TESTING.txt - run all tests using a virtual display
+GK_REQUIRE_GUI=1 xvfb-run -a python -m coverage run -m unittest discover -s tests -v
+python -m coverage report
+
+FROM CODE: When GK_REQUIRE_GUI is absent, GUI tests explicitly skip if Tk or a
+display is unavailable. Core tests still run. That is useful for local work,
+but it is not evidence that the complete application passed its tests. Set
+GK_REQUIRE_GUI=1 for a full validation run. CI always sets it.
+
+FROM CODE: CI uses a regular installation rather than an editable one:
+
+# docs/TESTING.txt - run in a separate clean environment for packaging checks
+python -m pip install ".[dev]"
+
+FROM CODE: CI also sets GK_EXPECT_INSTALLED=1. This makes the packaging test
+reject imports from checkout/src, catching accidental source-path injection.
+The bundled-recipe test then reads data from the installed package. Locally,
+only set this variable when intentionally checking a regular installation;
+an editable development install is expected to import from src.
+
+What the maintained tests check
+
+FROM CODE:
+- test_models.py: invalid fields, NaN/infinity/bools, overflow-sized quantities,
+  valid dates, normalization, serialization and immutable domain objects.
+- test_inventory.py: expired/today/future boundaries, leap days, year changes,
+  ordering, copied inputs and immutable snapshots.
+- test_storage.py: malformed files remain untouched; missing files represent
+  first use; permission, partial-write and replacement failures preserve the
+  saved inventory; serialization fails before writes; retries succeed.
+- test_recipes.py: matching, tie-breaking, limit after ranking, normalization,
+  custom/bundled data, schema errors and contextual file errors.
+- test_app.py: real hidden Tk widgets, synthetic inventory, unsuccessful
+  mutations preserving memory/disk/views/form, selection identity, date
+  rollover in both directions, timer cleanup and startup errors/success.
+- test_packaging.py: installed distribution metadata, bundled recipes and
+  import origin when regular installation is required.
+
+How to explain the techniques
+
+FROM CODE: unittest.subTest runs related input cases while identifying exactly
+which input fails. assertRaises verifies the error contract. addCleanup closes
+windows and deletes temporary test files even if an assertion fails.
+
+FROM CODE: unittest.mock.patch temporarily injects a failure (such as a denied
+write), then restores the original function. Real temporary files remain in
+use so assertions can compare their bytes before and after the failure. This
+is repeatable on Windows and Linux; changing permission bits is less portable.
+
+FROM CODE: The app's injected clock lets tests control the date. Timer tests
+cancel the pending callback, schedule the same callback with after(0), and
+process the real Tcl event loop. They test rollover behavior without waiting
+for midnight or depending on a sleep duration. Tk callback exceptions are
+captured and fail the test, including during destruction. Message boxes are
+mocked to prevent a test waiting for a human click.
+
+FROM CODE: Coverage records which application statements and branch exits
+executed. It does not establish correctness, realistic usability or performance.
+CI requires passing tests/lint/format checks and publishes coverage for review;
+there is no arbitrary percentage threshold or coverage exclusion added here.
+
+ASSUMPTION: Keep assertions focused on observable behavior. A new bug should
+gain a regression test reproducing it before the fix. Avoid asserting every
+private helper call just to increase coverage.
+
+FROM CODE: CI is configured for every push, pull request and manual dispatch,
+on Windows/Linux with Python 3.11/3.12. It uploads a separate coverage XML
+report per matrix job. Configuration is not evidence those jobs have run.

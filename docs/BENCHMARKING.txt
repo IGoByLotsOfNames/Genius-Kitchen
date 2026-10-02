@@ -1,0 +1,158 @@
+# docs/BENCHMARKING.txt
+Phase 5: warm recipe-ranking latency
+
+ASSUMPTION - why this property matters
+As the recipe catalog grows, computing suggestions could delay interaction.
+Latency of the matching function is a useful, narrow measurement to establish
+before deciding whether an optimization is necessary. This is a hypothesis to
+investigate, not a claim that the present six-recipe application is slow.
+
+FROM CODE - measurement boundary
+The GUI's _refresh_recipes calls match_recipes synchronously. Each measured call
+includes pantry-name normalization, scanning recipe ingredients, allocating
+match objects, sorting all matches, and selecting the top ten.
+
+The timer excludes process startup, imports, recipe construction, JSON loading,
+inventory/expiry filtering, correctness checks, Tk rendering and report writing.
+Therefore the result is warm computation latency, not full application startup,
+click-to-render latency, recipe quality, AI accuracy or an executable benchmark.
+Garbage collection stays enabled; normal allocation/deallocation costs remain.
+
+FROM CODE - fixed scenarios
+1. Bundled: the actual six packaged recipes; pantry contains rice, egg, carrot,
+   onion, garlic and tomato. This describes a small existing-app scenario.
+2. Synthetic: 100, 1,000 and 10,000 recipes, with seed 20261002. Each recipe has
+   6-12 distinct ingredients drawn from a vocabulary of 256. A fixed pantry
+   contains 48 names. The full catalog is shuffled before taking nested prefixes.
+
+The synthetic series holds its generator and pantry fixed as catalog size
+changes. It is not a dataset of real users or real cooking recipes. Bundled and
+synthetic results should not be treated as one identical-distribution series.
+The report records realized ingredient counts and mean overlap per scenario;
+individual recipes are not forced to have exactly 48/256 coverage.
+
+FROM CODE - run design
+- Five sequential fresh Python processes; no competing benchmark workers.
+- Each process visits every scenario in a seeded shuffled order.
+- Three untimed warmup calls per scenario, followed by timed calibration that
+  is excluded from the headline samples.
+- Calibration doubles calls per batch until the batch reaches a 50 ms target,
+  or 131,072 calls. Calibration timings are recorded separately and never enter
+  the headline statistics. A cap hit is reported explicitly.
+- Seven timed batches per scenario in each process, using perf_counter_ns.
+- Batch duration divided by call count gives one per-call average.
+- The headline mean, median, sample standard deviation and sample variance are
+  computed across the five process means. Processes receive equal weight even
+  if calibration chose different batch sizes.
+- All batch durations and call counts remain available. No outliers are removed.
+- Workers fix PYTHONHASHSEED=0 and record source hashes. GC remains enabled.
+
+The 50 ms setting is a batching target, not a latency goal for the application.
+These samples do not measure individual-call tail latency, so do not call their
+percentiles p95 or p99 user-request latency. The five processes are repeated
+runs on one computer, not independent machines or a confidence interval.
+
+FROM CODE - correctness and reproducibility
+An untimed reference implementation uses set intersection/difference and exact
+fractions to determine coverage and ordering. It checks the selected recipe
+names, present/missing ingredients in recipe order, and coverage before and
+after timing. It rejects empty recipes or duplicate ingredients within a recipe; their
+product semantics remain undecided and are outside this benchmark's inputs.
+
+inputs.json saves the exact scenarios, including recipe order. Their SHA-256
+fingerprints and expected-result fingerprints are recorded in results.json.
+The benchmark hashes the models/recipes modules actually imported, rather than
+assuming an editable installation was used. A controller/worker source mismatch
+fails the run. The script itself, Python version, OS/CPU description, clock,
+parameters and raw batches are recorded too. It does not need Tk or a network.
+
+A seed alone is not a promise that every random API behaves identically across
+Python versions. To compare across versions, replay the saved inputs.json and
+check the fingerprints, rather than assuming regenerated inputs are identical.
+Do not edit the source while a run is in progress.
+
+Run from the repository root in your chosen Python environment:
+
+# Validate without collecting performance samples
+python -B benchmarks/recipe_matching.py --check
+
+# Collect a new measurement
+python -B benchmarks/recipe_matching.py
+
+FROM CODE: The default output is a new UTC-timestamped folder beneath
+benchmark-results/. It prints the summary and the final folder path.
+That folder contains inputs.json, results.json, samples.csv and summary.txt.
+No Git commands, app inventory updates, credentials or remote writes are used.
+The output directory is ignored by Git until evidence is intentionally selected
+for a later case study. Rerunning creates another folder rather than overwriting.
+
+For a different already-configured Python environment, from the project root:
+
+# docs/BENCHMARKING.txt - portable benchmark invocation
+python -B benchmarks/recipe_matching.py --check
+python -B benchmarks/recipe_matching.py
+
+Replay a saved input file (replace the timestamped directory with your own):
+
+# docs/BENCHMARKING.txt - PowerShell replay example
+& '..\environment\.venv\Scripts\python.exe' -B benchmarks/recipe_matching.py --inputs 'benchmark-results\YOUR_RUN\inputs.json'
+
+ASSUMPTION - practical run conditions
+Plug in the laptop, use one consistent power mode, and finish heavy background
+work such as installations or games before measuring. Do not run under coverage,
+a profiler or a debugger. Record anything you cannot control. These conditions
+reduce avoidable variation; the benchmark cannot certify a machine is idle.
+If a worker fails, the report records complete=false. An interruption while
+writing could leave unreadable JSON. Preserve incomplete/unreadable output and
+rerun; it must not support conclusions. Use only complete=true reports with all
+the expected workers and samples.
+Runtime depends on the computer; no elapsed-time estimate has been measured yet.
+
+Reading the report
+
+FROM CODE: sample_variance_ms2 is variance in squared milliseconds. Its square
+root, sample_stdev_ms, is easier to compare with mean_ms. Keep all five process
+means visible. Large dispersion warrants checking the environment and repeating
+the experiment, not keeping only the fastest batch.
+
+ASSUMPTION: For the synthetic series, compare growth ratios alongside recipe
+counts. That can reveal scale sensitivity on this workload; three catalog sizes
+cannot prove asymptotic complexity or predict all future data distributions.
+
+FROM CODE: With P pantry names, R recipes and K ingredient entries per recipe,
+the matcher normalizes P names, scans roughly 2RK entries, then sorts R matches.
+Under average constant-time set lookup and bounded string lengths, its sorting
+upper bound gives O(P + RK + R log R) time. It retains matches for all recipes
+before slicing, even when limit=10. These are source-level observations, not
+measured performance results. No optimization is included in Phase 5.
+
+ASSUMPTION: This is the current implementation's baseline. Phase 3 targeted
+correctness and Phase 4 targeted tests, so a before/after latency improvement
+would be an unsupported claim. If a later change targets speed, run both source
+versions on the same saved inputs, interpreter and machine, retain both reports,
+and check correctness before comparing distributions.
+
+Limitations
+
+FROM CODE: One fixed pantry and distribution do not cover sparse/full pantries,
+long or multilingual names, cold caches, huge real datasets, UI rendering,
+concurrent users, process startup or malformed-file behavior. Those would be
+separate experiments if the product needs them. No target SLA is asserted here.
+
+What to send back
+
+Paste summary.txt and the following notes. Keep results.json and samples.csv
+for follow-up analysis; their full paths are enough for the local assistant to
+read them. Do not type estimated latency numbers into this template.
+
+# docs/BENCHMARKING.txt - result notes template
+Results folder:
+Power source and power mode:
+Other substantial applications running:
+Any interruptions or warnings:
+Summary: [paste the generated summary.txt]
+
+Official method references
+https://docs.python.org/3.12/library/time.html#time.perf_counter_ns
+https://docs.python.org/3.12/library/statistics.html#statistics.variance
+https://docs.python.org/3.12/library/random.html#notes-on-reproducibility

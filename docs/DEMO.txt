@@ -1,0 +1,117 @@
+# docs/DEMO.txt
+Phase 6: a repeatable Genius Kitchen demonstration
+
+FROM CODE: From the checkout root, one command launches the complete sample:
+
+# demo.py - reviewer command with Python 3.11+ and Tk installed
+python demo.py
+
+FROM CODE: The launcher imports the checkout's src directory explicitly, so no
+pip install, network, credentials or API service is needed. It uses the bundled
+recipes and demo/pantry.json. Python 3.11+ with Tk and a graphical display is a
+prerequisite; this script is not a standalone executable or Python installer.
+The checkout must be writable so the demo can create its own inventory file.
+
+From another directory, pass the absolute path to your own checkout:
+
+python -B <path-to-checkout>/demo.py
+
+FROM CODE: Every launch creates a new .demo-runs/demo-<unique>/inventory.json
+beneath this checkout. The console prints that path. Existing demo sessions are
+preserved, and ~/.genius-kitchen/inventory.json is not loaded, reset or changed.
+Starting a fresh demo does not require a reset flag or deleting any directory.
+
+FROM CODE: The sample stores expiry offsets rather than hardcoded calendar
+dates. Milk expires one day before launch; Egg expires on the launch date.
+The normal GUI still uses its real date clock and will refresh if the date
+changes while it is open. Relaunch to restart the demonstration on a later day.
+
+Two-minute walkthrough
+
+1. Inventory tab: observe the nine sample ingredients and their quantities.
+   Milk is marked Expired; Egg, Tomato, Banana and Spring onion are marked
+   Expiring soon. This connects expiry tracking to the original food-waste
+   motivation without relying on a real household's private inventory.
+2. Recipe matches tab: Tomato Omelette and Vegetable Fried Rice are 100%.
+   Banana Oat Pancakes is 75%, missing milk, despite an expired Milk row being
+   present. Expired food is excluded from matching.
+3. Inventory tab: enter Milk / 1 / litre / Dairy and keep today's default expiry.
+   Click Add ingredient. There are now ten rows. Recipe matches should show
+   Banana Oat Pancakes at 100%, ranked first among the complete matches.
+4. Inventory tab: select the new Milk row with today's expiry, then click Remove
+   selected. Nine rows remain; the expired Milk is still there, and pancakes
+   return to 75%. This demonstrates selecting the correct record when names
+   repeat and keeping recipe results synchronized with saved inventory.
+5. Close the window. The console returns normally. Relaunching creates another
+   fresh sample while preserving the previous session's file.
+
+FROM CODE: demo/expected-output.txt records exact initial ranking and expected
+changes. Percentages count ingredient names, not sufficient quantities, food
+safety assessment or nutritional suitability. The demonstration uses synthetic
+pantry data and existing illustrative recipes.
+
+Verification commands
+
+# demo.py - headless sample validation, no inventory writes and no Tk import
+python demo.py --check
+
+# demo.py - real Tk widgets, hidden window, sample Add/Remove and persistence
+python -I -B demo.py --smoke-test
+
+FROM CODE: The smoke mode enters the real event loop, invokes the Add/Remove
+buttons, checks rendered text, and checks the saved inventory after each change.
+Unexpected modal errors become test failures; callback failures return a nonzero
+exit status. It exits by itself and preserves its restored sample file. Its
+clock is fixed to the captured launch date to avoid a midnight race in tests.
+
+FROM CODE: The workflow includes that smoke command on Windows and under Xvfb
+on Linux. This is local configuration; it is not a claim that remote jobs ran.
+
+Why these implementation choices
+
+FROM CODE: __file__ anchors paths to the launcher, making it work from another
+current directory. tempfile.mkdtemp allocates a distinct directory, avoiding
+session collisions. Relative expiry offsets keep the sample useful later.
+The explicit store passed into GeniusKitchenApp separates demo data from the
+normal user's inventory. The matching and persistence code is the real app.
+
+FROM CODE: Some portable Python distributions need Tcl/Tk script paths stated
+explicitly. The launcher checks for init.tcl/tk.tcl beside sys.base_prefix and
+sets TCL_LIBRARY/TK_LIBRARY only when those files exist and the corresponding
+environment variable is absent. Existing user settings are preserved. This is
+runtime discovery, not a hardcoded path to JJ's computer or a library download.
+
+FROM CODE: Closing the window requests mainloop exit; one finally block destroys
+the root and its timers. The smoke run temporarily replaces error dialogs so an
+unexpected failure cannot wait forever for a click on a hidden modal dialog.
+
+Troubleshooting
+
+- Missing Tk: use a Python distribution with Tk support. Running the Tkinter
+  module below should open its own diagnostic window. Linux also requires an
+  active display (or Xvfb for automated hidden smoke testing).
+- Tcl initialization error: check that your existing TCL_LIBRARY/TK_LIBRARY
+  settings point to the matching installed runtime. The launcher does not
+  overwrite explicit settings or download a replacement.
+- Cannot write the demo store: run the checkout from a writable directory.
+  The launcher reports the error and does not fall back to personal storage.
+- Sample check failed: preserve the message and compare pantry.json/bundled
+  recipes with the expected output. Do not silently adjust the displayed claims.
+
+# docs/DEMO.txt - standard Python Tk diagnostic
+python -m tkinter
+
+ASSUMPTION: Visual review should still check font sizes, spacing, focus behavior
+and the full window on the reviewer's OS and display scaling. Automated widget
+checks do not establish polished appearance or accessibility.
+
+Optional screenshot/GIF plan for the later README
+
+ASSUMPTION: Capture the Inventory tab with all nine rows visible, then Recipe
+matches with the two complete recipes and pancakes missing milk. A short clip
+can show adding fresh Milk, pancakes changing to 100%, removing that new row,
+and the return to 75%. Use only a fresh demo session. No screenshot or GIF is
+represented as captured or visually reviewed by this document.
+
+Official Tk prerequisite reference:
+https://docs.python.org/3.12/library/tkinter.html
