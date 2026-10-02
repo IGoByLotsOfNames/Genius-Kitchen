@@ -1,0 +1,26 @@
+# demo/expected-output.txt
+FROM CODE: A fresh launch uses the local date printed by the launcher.
+
+Inventory: 9 ingredients, sorted by expiry. Milk is expired. Egg expires today.
+Tomato and Banana expire in 2 days; Spring onion expires in 3 days.
+
+Recipe matches, in order:
+  Tomato Omelette: 100% | Missing: nothing
+  Vegetable Fried Rice: 100% | Missing: nothing
+  Banana Oat Pancakes: 75% | Missing: milk
+  Simple Shakshuka: 50% | Missing: onion, garlic
+  Chicken and Vegetable Soup: 25% | Missing: chicken, onion, potato
+  Garlic Butter Pasta: 0% | Missing: pasta, garlic, butter, parmesan
+
+The interface displays ingredient availability percentages. It does not promise
+that the pantry has enough quantity to cook a serving.
+
+Add: Milk, quantity 1, unit litre, category Dairy, expiry today (the form default).
+Expected: 10 ingredients, and Banana Oat Pancakes becomes 100% and ranks first.
+
+Select the newly added Milk with today's expiry and press Remove selected.
+Expected: 9 ingredients again; Banana Oat Pancakes returns to 75%.
+The original expired Milk row remains throughout this walkthrough.
+
+Close and launch the demo again: a new separate nine-item inventory is created.
+Your earlier demo edits remain in the prior folder printed by the launcher.
