@@ -1,0 +1,13 @@
+Genius Kitchen demo - sample dates relative to 2026-10-02
+Inventory: 9 ingredients; Milk is expired, Egg expires today.
+Recipe matches:
+  Tomato Omelette: 100% | Missing: nothing
+  Vegetable Fried Rice: 100% | Missing: nothing
+  Banana Oat Pancakes: 75% | Missing: milk
+  Simple Shakshuka: 50% | Missing: onion, garlic
+  Chicken and Vegetable Soup: 25% | Missing: chicken, onion, potato
+  Garlic Butter Pasta: 0% | Missing: pasta, garlic, butter, parmesan
+Try: add Milk, quantity 1, unit litre, category Dairy, keeping today's expiry.
+Banana Oat Pancakes should become 100%; remove the new milk to return to 75%.
+Demo inventory saved to: <checkout>\.demo-runs\demo-vq2luags\inventory.json
+Normal launch and window-close protocol passed; no visual quality claim.
