@@ -1,0 +1,140 @@
+{
+  "recorded_date": "2026-10-02",
+  "baseline_commit": "9a9488e6886b726b7b5d144dc929d29d4306c448",
+  "benchmark_run": "20261002T130916061998Z",
+  "benchmark_integrity_verification": true,
+  "new_performance_measurements_collected_in_documentation_phase": false,
+  "validation_scope": "Existing Phase 6 local Windows/Python 3.12.14 run; no new application tests in documentation phase.",
+  "validation_runtime": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "validation_tests": {
+    "count": 83,
+    "skipped": 0,
+    "passed": true
+  },
+  "validation_command_exit_codes": {
+    "lint": 0,
+    "format": 0,
+    "tests": 0,
+    "sample_check": 0,
+    "gui_smoke": 0,
+    "normal_close": 0
+  },
+  "remote_ci_executed": false,
+  "user_reported_conditions": {
+    "power_mode": "silent i guess",
+    "power_mode_certainty": "uncertain",
+    "heavy_applications": "none reported",
+    "power_source": "not specified"
+  },
+  "matching_sources": {
+    "genius_kitchen.models": {
+      "current_sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+      "recorded_sha256": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+      "matches": true
+    },
+    "genius_kitchen.recipes": {
+      "current_sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+      "recorded_sha256": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+      "matches": true
+    },
+    "benchmark": {
+      "current_sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290",
+      "recorded_sha256": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290",
+      "matches": true
+    }
+  },
+  "implementation_and_test_sha256": {
+    ".github/workflows/python.yml": "65cc1d43c6a2d8ba6b004654abb67f6a5e650ef952cf05b8c38422d88e9ebea3",
+    "pyproject.toml": "8d80c4d6453f7818f14ab06b7ed1919b99fc2b3b01dab3757b0c4c82fb94df3b",
+    "src/genius_kitchen/__init__.py": "dc75adccde1b1b5bce3fa07b7016b68ec7a4c99cb5f679495685da4324f9c224",
+    "src/genius_kitchen/__main__.py": "df9e00148151f02484be40fd539eee79e2b94a99010db37ebd729e893c9e1c53",
+    "src/genius_kitchen/app.py": "5268ecf0d3ffd0615f558bca30c633b84d4c5acc5fb9f847dd576df22a7247f1",
+    "src/genius_kitchen/inventory.py": "414dfb98693d3b4ec93a63684369bc1c19705e3b8bf4ce68ed80fb6672c1b841",
+    "src/genius_kitchen/models.py": "f4774cdcebcaf23458849e71320964e65e064003786c22bdbbcc3f092d877a5a",
+    "src/genius_kitchen/recipes.py": "b455e7e45d09bd03d116ac89ba64e6551d703603bfdfbbb04d2f53c125940f80",
+    "src/genius_kitchen/storage.py": "aa5bc487a4925c9ef86d0db75288c87eb9c977afc01821f050ba00a4729ff215",
+    "tests/test_inventory.py": "bab2c06b1347703a057074240d0c5f9646fe4849878b6c3fee4f0adde213894c",
+    "tests/test_recipes.py": "a6189f4c07b5f4b8c32fee66fd2263bac2f509a9059b655f1958d8fb6e3b6652",
+    "tests/test_app.py": "e57dc2051b03cacf5ecf16bf13d65bdea79e9fb7fb3c7125cd6f21fe0afa7c97",
+    "tests/test_models.py": "7c76dd1d504be89ec30a29ade14e41c7a70f44c9d7d0be84418793fa8cefc052",
+    "tests/test_packaging.py": "f8f85d06c4b34d54839582008cb24f41754a38d45bd8e5ae16204e679ed94aad",
+    "tests/test_storage.py": "c63be92d8a03b9bf881b080b9902021cecc6bff1865ef93696fcb7a9da689485",
+    "benchmarks/__init__.py": "bac315112a3cc5e24ccf90ab561cf7879a95078c6624d162d6036b109c21af72",
+    "benchmarks/recipe_matching.py": "4a75df10436648cea03558134a2ef066b0f116ebdb6eabc68b17175b9e1e5290",
+    "tests/test_benchmark.py": "406efbabd51e722334db5920bc7d994dd21c2476b30df3c5bea9094a81cbc614",
+    "demo.py": "0921c6f4e8718b192e8adb207bf3fe7bc1914f9de5d59891456c521d6a67d9da",
+    "tests/test_demo.py": "95bc3c54820135eb05d5933904529a85721f8efa9ba627284db67e176e21a1ad"
+  },
+  "files": [
+    {
+      "path": "benchmark/inputs.json",
+      "source_relative_to_isolated_workspace": "working/benchmark-results/20261002T130916061998Z/inputs.json",
+      "original_sha256": "a561254a18abf7420225e1a3f09785cb5ffd06ff37d13f46af34e11438751bb8",
+      "retained_sha256": "a561254a18abf7420225e1a3f09785cb5ffd06ff37d13f46af34e11438751bb8",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "benchmark/results.json",
+      "source_relative_to_isolated_workspace": "working/benchmark-results/20261002T130916061998Z/results.json",
+      "original_sha256": "6c19b47865d79beddf5dc5f1aacc5cfef13226d40f07e695e88829f50d074da8",
+      "retained_sha256": "6c19b47865d79beddf5dc5f1aacc5cfef13226d40f07e695e88829f50d074da8",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "benchmark/samples.csv",
+      "source_relative_to_isolated_workspace": "working/benchmark-results/20261002T130916061998Z/samples.csv",
+      "original_sha256": "f298a2c7fb6a90b8ddba81cdc08da5701b69d1e681a1d2a970ba13a8de7290d6",
+      "retained_sha256": "f298a2c7fb6a90b8ddba81cdc08da5701b69d1e681a1d2a970ba13a8de7290d6",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "benchmark/summary.txt",
+      "source_relative_to_isolated_workspace": "working/benchmark-results/20261002T130916061998Z/summary.txt",
+      "original_sha256": "458f4970b14c1218ab5719d96fe96ce3ca64a2a72ea1f047df3537f37d3bec2e",
+      "retained_sha256": "458f4970b14c1218ab5719d96fe96ce3ca64a2a72ea1f047df3537f37d3bec2e",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "validation/tests.txt",
+      "source_relative_to_isolated_workspace": "audit/phase6/tests.txt",
+      "original_sha256": "d0f839f19f9bd4173052caff4166b2eacdc2c395598872f4b823aba7ad81efa2",
+      "retained_sha256": "d0f839f19f9bd4173052caff4166b2eacdc2c395598872f4b823aba7ad81efa2",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "validation/lint.txt",
+      "source_relative_to_isolated_workspace": "audit/phase6/lint.txt",
+      "original_sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "retained_sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "validation/format.txt",
+      "source_relative_to_isolated_workspace": "audit/phase6/format.txt",
+      "original_sha256": "c1945ccdad8a51c6f52ccc67f4eac749b2feb40bf5ccf4423857ac461d794329",
+      "retained_sha256": "c1945ccdad8a51c6f52ccc67f4eac749b2feb40bf5ccf4423857ac461d794329",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "validation/sample_check.txt",
+      "source_relative_to_isolated_workspace": "audit/phase6/sample_check.txt",
+      "original_sha256": "22c0f52694aa48f3b74f3e1710ad46ad710d402393031269ec06a250a66b7833",
+      "retained_sha256": "22c0f52694aa48f3b74f3e1710ad46ad710d402393031269ec06a250a66b7833",
+      "transformation": "none; byte-for-byte copy"
+    },
+    {
+      "path": "validation/gui_smoke.txt",
+      "source_relative_to_isolated_workspace": "audit/phase6/gui_smoke.txt",
+      "original_sha256": "c04a172eab4bd28cd95f1229ee82118ba1026367ffa55610aa079023025f28ef",
+      "retained_sha256": "980d52c4cb80a6fdb8a64872e637a07721e4a3a0113186fa2061baaea632ffa8",
+      "transformation": "1 local checkout path prefix(es) replaced with <checkout>"
+    },
+    {
+      "path": "validation/normal_close.txt",
+      "source_relative_to_isolated_workspace": "audit/phase6/normal_close.txt",
+      "original_sha256": "47b4f15d593a5826383a34219f2d575f19471c59ffe93b4469f58cf947f95309",
+      "retained_sha256": "31a7afe6a2dec2e11e2cd9a7aadee5359e89b3046438e91d082865e52b3726c8",
+      "transformation": "1 local checkout path prefix(es) replaced with <checkout>"
+    }
+  ]
+}

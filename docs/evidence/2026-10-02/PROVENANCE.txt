@@ -1,0 +1,52 @@
+# docs/evidence/2026-10-02/PROVENANCE.txt
+Evidence for the Genius Kitchen case study, recorded 2 October 2026
+
+VERIFIED: This folder retains an existing user-run benchmark and existing local
+validation logs. Documentation work collected no new performance measurements
+and did not rerun the application test suite. manifest.json records source and
+retained SHA-256 hashes, runtime, command exit codes and relevant source hashes.
+
+VERIFIED: benchmark/ contains byte-for-byte copies of the user's selected run
+20261002T130916061998Z: inputs.json, results.json, samples.csv and summary.txt.
+The original run remains in working/benchmark-results/ inside the isolated
+workspace. A sibling run was not used or combined with this one.
+
+VERIFIED: The benchmark verification checked summary arithmetic, raw CSV/JSON
+agreement, completeness, exact inputs, oracle fingerprints and current matching
+source fingerprints. Hashes verify consistency with these recorded artifacts;
+they do not independently establish who ran a command or that a computer was
+idle. The timings are the user's observations on one machine.
+
+VERIFIED: The user reported no heavy applications and said power mode was
+"silent i guess". Mode is uncertain and power source is unspecified. Dispersion
+is across process means, not request-tail latency. The benchmark is a warm
+ranking baseline, excluding startup, loading, expiry filtering and rendering.
+No speedup, adoption, food-waste reduction or AI-accuracy measurement is claimed.
+
+VERIFIED: validation/ retains the latest Phase 6 local Windows/Python 3.12.14
+logs: 83 tests with zero skips, Ruff lint/format, headless sample verification,
+real Tk Add/Remove smoke verification and normal window-close verification.
+All recorded command exit codes were zero. The audit scripts and original logs
+remain in audit/phase6/ in the isolated workspace.
+
+VERIFIED: Only absolute local checkout path prefixes in GUI logs are replaced
+with <checkout>. Session folder names, outputs and outcomes are unchanged.
+Each transformation and both hashes are recorded in manifest.json. Other logs
+and every benchmark artifact are copied without modification. The test-log
+elapsed duration describes that test invocation, not application performance.
+
+FROM CODE: CI is configured locally for Windows/Linux and Python 3.11/3.12.
+Remote CI has not run this work. The local validation uses the editable working
+installation; it is not a new regular-package validation. Earlier Phase 4
+installed-package/coverage evidence remains a historical snapshot, so this
+folder does not present its percentage as current coverage.
+
+VERIFIED: The local work used the GitHub implementation at baseline commit
+9a9488e6886b726b7b5d144dc929d29d4306c448. All subsequent development remained
+isolated. The case-study copy includes local changes not yet committed or
+published; it is not a statement about the remote repository's current files.
+
+FROM CODE: Follow README.md and docs/BENCHMARKING.txt to validate or rerun the
+same inputs in a configured Python environment. Preserve this dated snapshot;
+retain a new report for future code or environment changes rather than updating
+these timings in place.
