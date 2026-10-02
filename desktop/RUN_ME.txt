@@ -1,0 +1,46 @@
+Genius Kitchen desktop application
+
+Double-click dist\GeniusKitchen-Desktop.exe. Python, pip and an internet
+connection are not needed to use the built application.
+
+Normal use loads/saves your pantry at:
+  %USERPROFILE%\.genius-kitchen\inventory.json
+This is the same default data location as the Python application. Existing
+invalid data is reported rather than reset. Use only one running instance per
+inventory; the current JSON store has no writer-conflict protection.
+
+Try the included sample separately (PowerShell from this desktop folder):
+  & '.\dist\GeniusKitchen-Desktop.exe' --demo
+Each demo gets a fresh dist\demo-runs\pantry-... folder, preserving prior demo
+sessions and personal inventory. Nine sample ingredients include expired Milk.
+Add fresh Milk to move Banana Oat Pancakes from 75% to 100%; remove that new row
+to restore the original result. Dates are relative to the day you launch it.
+
+Choose a different real pantry location:
+  & '.\dist\GeniusKitchen-Desktop.exe' --data-dir 'C:\path\to\your\pantry'
+The selected directory will contain inventory.json. The desktop and web versions
+do not synchronize their inventories.
+Normal mode also accepts --recipes 'C:\path\to\recipes.json' for a custom catalog.
+
+Build again (Windows with Python 3.11+ and Tcl/Tk, from this desktop folder):
+  python -m pip install --target tools -r requirements-build.txt
+  python -B build_desktop.py
+  python -B verify_desktop.py
+The build uses the repository root source without modifying it, pins the
+builder dependencies, and records source hashes, versions and EXE SHA-256 in
+build-report.json. Build logs and intermediate files stay under build/. A build
+timestamp is embedded, so repeatable instructions do not imply bit-identical EXEs.
+The optional --tools-dir argument selects another installed PyInstaller folder.
+
+Verification runs the actual EXE with hidden real Tk widgets, bundled recipes,
+Add/Remove button callbacks and persisted-data reload. Test data and JSON reports
+stay under verification/. No personal pantry or interactive window is opened.
+See verification\latest.json for the final outcome.
+
+This is an unsigned portable Windows application, not an installer. No signing
+certificate or auto-update service has been added. Windows may identify it as
+an unrecognized publisher. It was tested on the local Windows/Python build host;
+a separate clean Windows PC and manual visual/accessibility review remain untested.
+
+The original icon is retained. Source and ownership terms are unchanged; see
+dist\LICENSE.txt. Build tooling reference: https://pyinstaller.org/en/stable/usage.html
