@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Vegetable Fried Rice",
+    "ingredients": ["rice", "egg", "carrot", "spring onion", "soy sauce"],
+    "instructions": ["Cook the rice and allow it to cool.", "Stir-fry the vegetables.", "Add egg, rice and soy sauce, then toss until hot."]
+  },
+  {
+    "name": "Tomato Omelette",
+    "ingredients": ["egg", "tomato", "spring onion"],
+    "instructions": ["Whisk the eggs.", "Cook the tomato until soft.", "Add the egg and fold when set."]
+  },
+  {
+    "name": "Garlic Butter Pasta",
+    "ingredients": ["pasta", "garlic", "butter", "parmesan"],
+    "instructions": ["Cook the pasta.", "Warm garlic in butter.", "Toss with pasta and parmesan."]
+  },
+  {
+    "name": "Chicken and Vegetable Soup",
+    "ingredients": ["chicken", "carrot", "onion", "potato"],
+    "instructions": ["Brown the chicken.", "Add chopped vegetables and water.", "Simmer until tender."]
+  },
+  {
+    "name": "Banana Oat Pancakes",
+    "ingredients": ["banana", "oats", "egg", "milk"],
+    "instructions": ["Blend all ingredients.", "Cook small portions in a lightly oiled pan."]
+  },
+  {
+    "name": "Simple Shakshuka",
+    "ingredients": ["egg", "tomato", "onion", "garlic"],
+    "instructions": ["Cook onion and garlic.", "Add tomato and simmer.", "Crack in eggs and cover until set."]
+  }
+]
+
