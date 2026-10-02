@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Keep track of your ingredients and find something good to cook.">
+  <title>Genius Kitchen · Your pantry</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to your pantry</a>
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="Genius Kitchen home"><img src="/favicon.svg" alt="" width="42" height="42"><span>Genius<br>Kitchen<span class="brand-dot">.</span></span></a>
+    <p class="nav-caption">YOUR KITCHEN</p>
+    <nav>
+      <button class="nav-item active" data-page="pantry" aria-current="page"><span data-icon="pantry"></span>My pantry<span id="nav-count" class="nav-count">—</span></button>
+      <button class="nav-item" data-page="recipes"><span data-icon="book"></span>Recipe ideas<span data-icon="arrow" class="nav-arrow"></span></button>
+    </nav>
+    <div class="sidebar-note"><span data-icon="leaf"></span><p>A good meal starts<br>with what you have.</p><span class="note-line"></span></div>
+    <div class="sidebar-bottom">
+      <button id="backup-button" class="quiet-button"><span data-icon="backup"></span>Import &amp; backup</button>
+      <button id="stop-button" class="quiet-button"><span data-icon="power"></span>Close app</button>
+      <div class="local-status"><span class="status-dot"></span><span id="connection-label">Connecting to your pantry</span></div>
+    </div>
+  </aside>
+
+  <main id="main" tabindex="-1">
+    <div class="topline"><span id="breadcrumb">MY PANTRY / OVERVIEW</span><div><span id="sample-label" class="sample-label" hidden>Sample pantry</span><span id="today-label"></span></div></div>
+    <div id="connection-error" class="notice error" role="alert" hidden></div>
+    <section id="pantry-page" aria-labelledby="pantry-heading">
+      <header class="hero"><div><p class="eyebrow">A FRESH START, EVERY DAY</p><h1 id="pantry-heading">Good food.<br><em>Less forgotten.</em></h1><p class="hero-description">Know what you have. Make something of it.</p></div><button class="primary-button add-button" data-add><span data-icon="plus"></span>Add ingredient</button></header>
+      <div class="stats" aria-label="Pantry overview">
+        <button class="stat-card" data-stat-filter="all"><span class="stat-icon mint" data-icon="pantry"></span><span><strong id="stat-total">—</strong><span>Ingredients in your pantry</span></span><span class="stat-arrow" data-icon="arrow"></span></button>
+        <button class="stat-card" data-stat-filter="soon"><span class="stat-icon apricot" data-icon="clock"></span><span><strong id="stat-soon">—</strong><span>To use in the next 3 days</span></span><span class="stat-arrow" data-icon="arrow"></span></button>
+        <button class="stat-card" data-stat-filter="expired"><span class="stat-icon rose" data-icon="alert"></span><span><strong id="stat-expired">—</strong><span>Past their expiry date</span></span><span class="stat-arrow" data-icon="arrow"></span></button>
+      </div>
+      <div class="workspace-grid">
+        <section class="pantry-panel" aria-labelledby="inventory-heading">
+          <div class="section-title"><div><p class="eyebrow">A PLACE FOR EVERYTHING</p><h2 id="inventory-heading">Your ingredients <span id="ingredient-count" class="count-label"></span></h2></div><button id="refresh-button" class="icon-button" aria-label="Refresh pantry" title="Refresh pantry"><span data-icon="refresh"></span></button></div>
+          <label class="search-box"><span data-icon="search"></span><input id="search" type="search" placeholder="Find an ingredient or category…" aria-label="Search ingredients"></label>
+          <div class="filter-row" aria-label="Filter ingredients"><button class="chip active" data-filter="all" aria-pressed="true">Everything</button><button class="chip" data-filter="soon" aria-pressed="false">Use soon</button><button class="chip" data-filter="expired" aria-pressed="false">Expired</button></div>
+          <div class="table-wrap"><table><thead><tr><th scope="col">INGREDIENT</th><th scope="col">QUANTITY</th><th scope="col">EXPIRY</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody id="inventory-body"><tr><td colspan="4" class="loading-cell">Opening your pantry…</td></tr></tbody></table></div>
+          <div id="pantry-empty" class="empty-state" hidden><span class="empty-illustration" data-icon="pantry"></span><h3>A little space for good things.</h3><p>Add your first ingredient, or explore with a sample pantry.</p><div class="button-row"><button class="primary-button" data-add>Add an ingredient</button><button class="secondary-button" id="load-sample">Try a sample pantry</button></div></div>
+          <div id="search-empty" class="empty-state compact" hidden><span data-icon="search"></span><h3>No ingredients found</h3><p>Try another name or choose a different filter.</p><button class="text-button" id="clear-search">Show everything</button></div>
+          <div class="table-footer"><span id="visible-count">Your ingredients, ordered by expiry</span><span class="subtle" data-icon="leaf"></span></div>
+        </section>
+        <aside class="recipe-aside" aria-labelledby="suggestion-heading">
+          <div class="cook-note"><div class="cook-note-top"><span class="eyebrow">TONIGHT, SORTED</span><span data-icon="spark"></span></div><h2 id="suggestion-heading">Use what<br>you have.</h2><p id="ready-description">Your next meal might already be in your pantry.</p><button class="light-button" data-page="recipes">Explore recipe ideas<span data-icon="arrow"></span></button><div class="bowl-art" aria-hidden="true"><span class="bowl-leaf one"></span><span class="bowl-leaf two"></span><span class="bowl-leaf three"></span><span class="bowl-tomato"></span><span class="bowl"></span></div></div>
+          <div class="aside-title"><h3>A few ideas for you</h3><span id="aside-count"></span></div><div id="recipe-teasers"></div>
+          <p class="small-note">Matches use ingredient names. Check quantities, dietary needs and the condition of your food before cooking.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="recipes-page" aria-labelledby="recipes-heading" hidden>
+      <header class="hero recipes-hero"><div><p class="eyebrow">A LITTLE DINNER INSPIRATION</p><h1 id="recipes-heading">Something good<br><em>is in the making.</em></h1><p class="hero-description">Simple ideas, matched to your unexpired ingredients.</p></div><button class="secondary-button" data-page="pantry"><span data-icon="pantry"></span>Back to pantry</button></header>
+      <div class="recipe-toolbar"><h2>From pantry to plate <span id="recipe-count" class="count-label"></span></h2><div class="filter-row" aria-label="Filter recipes"><button class="chip active" data-recipe-filter="all" aria-pressed="true">All ideas</button><button class="chip" data-recipe-filter="ready" aria-pressed="false">All ingredients available</button></div></div>
+      <div id="recipe-grid" class="recipe-grid"></div>
+      <div id="recipes-empty" class="empty-state" hidden><span class="empty-illustration" data-icon="book"></span><h3>A few ingredients away.</h3><p>No complete matches yet. Explore all ideas to see what is missing.</p><button class="secondary-button" id="show-all-recipes">See all recipe ideas</button></div>
+      <p class="small-note recipe-disclaimer">Six illustrative recipes are included. Coverage reflects ingredient names, not sufficient amounts, cooking time or dietary suitability.</p>
+    </section>
+    <footer class="main-footer"><span>GENIUS KITCHEN<span class="brand-dot">.</span></span><span>Made for the everyday kitchen.</span><span>Local edition</span></footer>
+  </main>
+
+  <dialog id="ingredient-dialog" aria-labelledby="ingredient-dialog-title">
+    <form id="ingredient-form"><div class="dialog-header"><div><p class="eyebrow">MAKE ROOM FOR SOMETHING GOOD</p><h2 id="ingredient-dialog-title">Add an ingredient</h2></div><button type="button" class="icon-button" data-close="ingredient-dialog" aria-label="Close ingredient form"><span data-icon="close"></span></button></div>
+      <label>Ingredient name<input name="name" id="ingredient-name" placeholder="e.g. Cherry tomatoes" maxlength="160" required autocomplete="off"></label>
+      <div class="form-grid"><label>Quantity<input name="quantity" id="ingredient-quantity" type="number" step="any" min="0" value="1" required></label><label>Unit<input name="unit" id="ingredient-unit" value="item" placeholder="e.g. g, litre, items" maxlength="80" required></label></div>
+      <div class="form-grid"><label>Category<select name="category" id="ingredient-category"><option>Vegetable</option><option>Fruit</option><option>Dairy</option><option>Meat &amp; fish</option><option>Pantry</option><option selected>Other</option></select></label><label>Expiry date<input name="expires_on" id="ingredient-expiry" type="date" required></label></div>
+      <p class="field-note">An ingredient stays available through its expiry date.</p><p id="form-error" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="secondary-button" data-close="ingredient-dialog">Cancel</button><button type="submit" id="save-ingredient" class="primary-button">Save ingredient<span data-icon="arrow"></span></button></div>
+    </form>
+  </dialog>
+  <dialog id="recipe-dialog" aria-labelledby="recipe-dialog-title"><div class="dialog-header"><p class="eyebrow">FROM YOUR RECIPE BOOK</p><button class="icon-button" data-close="recipe-dialog" aria-label="Close recipe"><span data-icon="close"></span></button></div><div id="recipe-detail"></div></dialog>
+  <dialog id="backup-dialog" aria-labelledby="backup-title"><div class="dialog-header"><div><p class="eyebrow">A COPY, JUST IN CASE</p><h2 id="backup-title">Your pantry, backed up.</h2></div><button class="icon-button" data-close="backup-dialog" aria-label="Close backups"><span data-icon="close"></span></button></div><p class="dialog-copy">Your pantry is saved on this computer. Export a copy to keep a backup or move ingredients between the desktop and browser versions.</p><div class="backup-option"><span class="stat-icon mint" data-icon="download"></span><div><h3>Export your pantry</h3><p>Download an inventory JSON file.</p></div><button id="export-button" class="secondary-button">Export</button></div><div class="backup-option"><span class="stat-icon apricot" data-icon="upload"></span><div><h3>Import a pantry</h3><p>Replace this pantry with a saved inventory.</p></div><button id="import-button" class="secondary-button">Choose file</button><input id="import-file" type="file" accept="application/json,.json" hidden></div><p class="small-note">Imports replace this browser pantry only. Export a backup first if you want to keep its current contents.</p></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><div class="dialog-header"><h2 id="confirm-title">Please confirm</h2><button class="icon-button" data-close="confirm-dialog" aria-label="Cancel"><span data-icon="close"></span></button></div><p id="confirm-message" class="dialog-copy"></p><div class="dialog-actions"><button id="confirm-cancel" class="secondary-button">Cancel</button><button id="confirm-ok" class="primary-button">Continue</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
