@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="468pt" viewBox="0 0 792 468" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 468 
+L 792 468 
+L 792 0 
+L 0 0 
+z
+" style="fill: #f7f9fc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 246.96 185.04 
+L 545.04 185.04 
+Q 552.24 185.04 552.24 177.84 
+L 552.24 113.76 
+Q 552.24 106.56 545.04 106.56 
+L 246.96 106.56 
+Q 239.76 106.56 239.76 113.76 
+L 239.76 177.84 
+Q 239.76 185.04 246.96 185.04 
+z
+" clip-path="url(#p21085e054c)" style="fill: #e8f4f5; stroke: #cbd5e1; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 34.56 343.44 
+L 253.44 343.44 
+Q 260.64 343.44 260.64 336.24 
+L 260.64 250.56 
+Q 260.64 243.36 253.44 243.36 
+L 34.56 243.36 
+Q 27.36 243.36 27.36 250.56 
+L 27.36 336.24 
+Q 27.36 343.44 34.56 343.44 
+z
+" clip-path="url(#p21085e054c)" style="fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 286.56 343.44 
+L 505.44 343.44 
+Q 512.64 343.44 512.64 336.24 
+L 512.64 250.56 
+Q 512.64 243.36 505.44 243.36 
+L 286.56 243.36 
+Q 279.36 243.36 279.36 250.56 
+L 279.36 336.24 
+Q 279.36 343.44 286.56 343.44 
+z
+" clip-path="url(#p21085e054c)" style="fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 538.56 343.44 
+L 757.44 343.44 
+Q 764.64 343.44 764.64 336.24 
+L 764.64 250.56 
+Q 764.64 243.36 757.44 243.36 
+L 538.56 243.36 
+Q 531.36 243.36 531.36 250.56 
+L 531.36 336.24 
+Q 531.36 343.44 538.56 343.44 
+z
+" clip-path="url(#p21085e054c)" style="fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 34.56 440.64 
+L 757.44 440.64 
+Q 764.64 440.64 764.64 433.44 
+L 764.64 378.72 
+Q 764.64 371.52 757.44 371.52 
+L 34.56 371.52 
+Q 27.36 371.52 27.36 378.72 
+L 27.36 433.44 
+Q 27.36 440.64 34.56 440.64 
+z
+" clip-path="url(#p21085e054c)" style="fill: #e8f4f5; stroke: #cbd5e1; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #102a43" x="28.8" y="34.56" transform="rotate(-0 28.8 34.56)">Genius Kitchen / current architecture</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #486581" x="28.8" y="63.36" transform="rotate(-0 28.8 63.36)">A local desktop interface with small, independently inspectable components.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #102a43" x="253.44" y="131.04" transform="rotate(-0 253.44 131.04)">Tkinter interface · app.py</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #486581" x="253.44" y="159.746391" transform="rotate(-0 253.44 159.746391)">Add / remove ingredients · refresh views</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #102a43" x="41.04" y="267.84" transform="rotate(-0 41.04 267.84)">Inventory · inventory.py</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; fill: #486581" transform="translate(41.04 296.546391)">Expiry ordering and date filters</text>
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; fill: #486581" transform="translate(41.04 311.210694)">Available ingredient names</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #102a43" x="293.04" y="267.84" transform="rotate(-0 293.04 267.84)">JSON store · storage.py</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; fill: #486581" transform="translate(293.04 296.546391)">Load local inventory</text>
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; fill: #486581" transform="translate(293.04 311.210694)">Write temporary file → replace</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #102a43" x="545.04" y="267.84" transform="rotate(-0 545.04 267.84)">Matcher · recipes.py</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; fill: #486581" transform="translate(545.04 296.546391)">Rank coverage and missing names</text>
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; fill: #486581" transform="translate(545.04 311.210694)">Read six bundled recipes</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 286.149902 184.35854 
+Q 216.001129 213.119537 147.610943 241.159513 
+" style="fill: none; stroke: #176b87; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 152.070658 241.492604 
+L 147.610943 241.159513 
+L 150.553245 237.791596 
+z
+" style="fill: #176b87; stroke: #176b87; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 396 185.599951 
+Q 396 213.119059 396 238.737509 
+" style="fill: none; stroke: #176b87; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 398 234.737509 
+L 396 238.737509 
+L 394 234.737509 
+z
+" style="fill: #176b87; stroke: #176b87; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 505.850098 184.35854 
+Q 575.998871 213.119537 644.389057 241.159513 
+" style="fill: none; stroke: #176b87; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 641.446755 237.791596 
+L 644.389057 241.159513 
+L 639.929342 241.492604 
+z
+" style="fill: #176b87; stroke: #176b87; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="text_11">
+    <g id="patch_10">
+     <path d="M 362.726562 222.799687 
+L 429.273438 222.799687 
+L 429.273438 205.121562 
+L 362.726562 205.121562 
+z
+" style="fill: #f7f9fc"/>
+    </g>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #176b87" x="396" y="216.72" transform="rotate(-0 396 216.72)">coordinates</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #102a43" x="41.04" y="396" transform="rotate(-0 41.04 396)">Shared domain objects · models.py</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #486581" x="41.04" y="424.751453" transform="rotate(-0 41.04 424.751453)">Ingredient: quantity, unit, category, expiry date     |     Recipe: names, ingredients, instructions</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #486581" x="28.8" y="361.44" transform="rotate(-0 28.8 361.44)">The interface passes available names from the inventory into the matcher.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p21085e054c">
+   <rect x="0" y="0" width="792" height="468"/>
+  </clipPath>
+ </defs>
+</svg>
