@@ -6,6 +6,13 @@ build/
 dist/
 .pytest_cache/
 .coverage
+.coverage.*
+.ruff_cache/
+coverage.json
+coverage.xml
+htmlcov/
+benchmark-results/
+.demo-runs/
 inventory.json
 *.tmp
 .env
@@ -14,3 +21,14 @@ inventory.json
 *.pickle
 *.zip
 
+
+# Build-only dependencies, private runtime data and local checks
+.verify-installed/
+web/runtime/
+web/tests/runtime/
+desktop/tools/
+desktop/verification/
+web/verification/
+desktop/demo-runs/
+**/assets/build-info.json
+**/build-report.json
